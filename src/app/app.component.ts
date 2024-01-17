@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ProyectoFinal';
+
+  pages = [
+    {titulo: 'Inicio', path: 'pages/inicio'},
+    {titulo: 'Login', path: 'pages/login'}
+  ]
 }

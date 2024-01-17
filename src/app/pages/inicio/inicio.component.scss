@@ -1,0 +1,33 @@
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #d32f2f; /* Adjust color to match your design */
+    color: white;
+  
+    & > div a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+    }
+  }
+  
+  .product-section {
+    padding: 2rem;
+  
+    h2 {
+      margin-bottom: 1.5rem;
+    }
+  
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+  
+      .product {
+        width: 200px; // adjust size as needed
+        margin: 0.5rem;
+        text-align: center;
+      }
+    }
+  }
+  

@@ -1,0 +1,216 @@
+/* Import a Google Font that closely matches your design */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Set the font for the entire app */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.app-header {
+    background-color: #d32f2f;
+    color: white;
+    padding: 1rem 0; // Give some padding top and bottom
+    text-align: center; // Center the text (and thus, the title)
+  
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+  h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .navigation-buttons {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: flex-end; // Align buttons to the right
+    width: 100%; // Take full width to push content to the right
+    margin-top: 1rem; // Provide some space between the title and the buttons
+  }
+
+  .login-link, .cart-link {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem; // Give some space between the buttons
+  }
+}
+
+/* Rest of your styles... */
+
+.app-footer {
+font-family: 'Roboto', sans-serif;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #d32f2f; /* Adjust color to match your design */
+    color: white;
+  
+    & > div a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+    }
+  }
+  
+  .product-section {
+    font-family: 'Roboto', sans-serif;
+    padding: 2rem;
+  
+    h2 {
+      margin-bottom: 1.5rem;
+    }
+  
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+  
+      .product {
+        width: 200px; // adjust size as needed
+        margin: 0.5rem;
+        text-align: center;
+      }
+    }
+  }
+  
+/* Estilos generales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Estilos del encabezado */
+header {
+    background-color: #84212c;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+header h1 {
+    color: white;
+    font-size: 32px;
+    text-align: center; /* Centrar el encabezado */
+}
+
+/* Estilos de la barra de navegación */
+nav {
+    background-color: #333333;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Alinear la barra a la derecha */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    color: #ff9900;
+}
+
+/* Estilos de la sección principal */
+main {
+padding: 20px;
+animation: fade-in 4s; /* Añadir la animación */
+}
+
+/* Definir la animación */
+@keyframes fade-in {
+0% {
+opacity: 0;
+background-color: white;
+}
+100% {
+opacity: 1;
+background-color: transparent;
+}
+}
+
+main h2 {
+    color: #333333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+main p {
+    color: #666666;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+main img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Estilos del pie de página */
+footer {
+    background-color: #333333;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer p {
+    color: white;
+    font-size: 18px;
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* Agregamos la animación */
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+/* Definimos la animación */
+@keyframes bounce {
+    0% {
+    transform: translateY(0);
+    }
+    50% {
+    transform: translateY(-20px);
+    }
+    100% {
+    transform: translateY(0);
+    }
+}
