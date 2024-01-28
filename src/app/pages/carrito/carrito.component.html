@@ -1,0 +1,22 @@
+
+  
+
+<!-- Botón para abrir el carrito -->
+<button (click)="toggleCart()">Carrito</button>
+
+<!-- Panel del carrito -->
+<div id="shopping-cart-panel" [class.open]="cartOpen">
+    <div id="shopping-cart-header">
+        
+        <button (click)="toggleCart()">&times;</button>
+        <h2>Shopping Bag</h2>
+        
+    </div>
+    
+    <div id="shopping-cart-content">
+        <p>Tu Shopping Bag está vacío.</p>
+        
+    </div>
+</div>
+
+<button (click)="redirectToCheckout()">Ir a la página de pago</button>

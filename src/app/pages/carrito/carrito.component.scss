@@ -1,0 +1,51 @@
+/* Estilos generales, puedes incluir o importar en tu archivo global de estilos */
+:host {
+    position: relative;
+    display: block;
+}
+
+/* Estilos para el panel del carrito */
+#shopping-cart-panel {
+    position: fixed;
+    right: -100%; /* Posición inicial fuera de la pantalla */
+    top: 0;
+    width: 400px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, .2);
+    transition: right 0.3s;
+    &.open {
+        right: 0;
+    }
+}
+
+#shopping-cart-header {
+    padding: 20px;
+    background: #f7f7f7;
+    border-bottom: 1px solid #e1e1e1;
+    position: relative;
+    button {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+    }
+}
+
+#shopping-cart-content {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Botón para abrir el carrito */
+button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}

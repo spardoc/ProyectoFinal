@@ -1,0 +1,28 @@
+<form [formGroup]="direccionForm">
+    <div>
+      <label for="provincia">Provincia:</label>
+      <input type="text" id="provincia" formControlName="provincia">
+    </div>
+    <div>
+      <label for="ciudad">Ciudad:</label>
+      <input type="text" id="ciudad" formControlName="ciudad">
+    </div>
+    <div>
+      <label for="direccion">Dirección:</label>
+      <input type="text" id="direccion" formControlName="direccion">
+    </div>
+    <div>
+      <label for="NumeroCasa">Número de Casa:</label>
+      <input type="number" id="NumeroCasa" formControlName="NumeroCasa">
+    </div>
+    <div>
+      <label for="referencia">Referencia:</label>
+      <input type="text" id="referencia" formControlName="referencia">
+    </div>
+    <div>
+      <label for="nombre_recibe">Nombre de quien recibe:</label>
+      <input type="text" id="nombre_recibe" formControlName="nombre_recibe">
+    </div>
+    <button (click)="guardarDireccion()">Guardar Dirección</button>
+  </form>
+  

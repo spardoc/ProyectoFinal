@@ -1,0 +1,50 @@
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito de Compras</title>
+
+</head>
+<body>
+
+<div class="shopping-cart">
+    <div class="cart-header">
+        <div>Producto(s)</div>
+        <div>Cantidad</div>
+        <div>Precio</div>
+    </div>
+    
+    <!-- Lista de productos -->
+    <div class="product-list">
+        <!-- Producto 1 -->
+        <div class="product-item">
+            <div class="product-image">
+                <img src="ruta/a/imagen-producto1.jpg" alt="Descripción del producto">
+            </div>
+            <div class="product-info">
+                <div class="product-name">Nombre del Producto 1</div>
+                <div class="product-quantity">
+                    <button>-</button>
+                    <span>1</span>
+                    <button>+</button>
+                </div>
+                <div class="product-price">$XX.XX</div>
+                <button class="product-remove">🗑</button>
+            </div>
+        </div>
+        <!-- Repetir bloques como el anterior para más productos -->
+    </div>
+    
+    <!-- Otras secciones como entrega, descuentos, etc. -->
+    <!-- ... -->
+    
+    <div class="checkout">
+        <button class="btn-entrega">ENTREGAR</button>
+       
+        <!-- ... -->
+        <button (click)="proceder()">te falto identificacion</button>
+        
+    </div>
+</div>
+
+</body>
