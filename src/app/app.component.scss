@@ -101,18 +101,18 @@ body {
 
 /* Estilos del encabezado */
 header {
-    background-color: #84212c;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
+  display: flex;
+  align-items: center; // Esto centrará verticalmente el contenido
+  justify-content: center; // Esto centrará horizontalmente el contenido
+  height: 80px; // Asegúrate de que el header tenga una altura fija
+  padding: 0; // Remueve el padding si no es necesario
+  background-color: #84212c;
 }
 
 header h1 {
-    color: white;
-    font-size: 32px;
-    text-align: center; /* Centrar el encabezado */
+  color: white;
+  font-size: 32px;
+  margin: 0; // Elimina cualquier margen para centrar correctamente
 }
 
 /* Estilos de la barra de navegación */
@@ -122,6 +122,26 @@ nav {
     display: flex;
     align-items: center;
     justify-content: flex-end; /* Alinear la barra a la derecha */
+}
+
+nav {
+  background-color: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; // Esto alineará tus enlaces a la derecha
+
+  ul {
+      list-style: none;
+      display: flex;
+      li {
+          a {
+              color: white;
+              text-decoration: none;
+              font-size: 18px;
+              font-family: 'Roboto', sans-serif; // Aplica la fuente Roboto
+          }
+      }
+  }
 }
 
 nav ul {
@@ -213,4 +233,9 @@ img {
     100% {
     transform: translateY(0);
     }
+}
+
+.div-center {
+  margin: 0 auto;
+  width: 50%; /* o cualquier ancho fijo */
 }

@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif; /* Example font */
+  }
+  
+  #pageTitle {
+    text-align: center;
+    /* Additional styles for your title if needed */
+  }
+  
+  #ribbon {
+    font-family: 'YourFontName', sans-serif; /* Replace with your actual font name */
+    text-align: center; /* If you want the ribbon content centered */
+    background-color: #333; /* Example background color */
+    color: white; /* Example text color */
+    padding: 10px;
+  }
+  
+  footer {
+    background-color: #222; /* Darker background for footer */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
