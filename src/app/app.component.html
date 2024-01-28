@@ -5,9 +5,12 @@
 </header>
 <nav>
   <ul>
-      <li *ngFor="let link of pages">
-          <a href="#" [routerLink]="link.path">{{link.titulo}}</a>
-      </li>
+    <li *ngFor="let link of pages">
+      <a [routerLink]="link.path">
+        <i class="{{ link.icon }}"></i>
+        {{ link.titulo }}
+      </a>
+    </li>    
   </ul>  
 </nav>
 <router-outlet></router-outlet>
