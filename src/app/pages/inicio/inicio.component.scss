@@ -1,35 +1,74 @@
 .top-nav {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    background-color: #d32f2f; /* Adjust color to match your design */
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #d32f2f; /* Ajusta el color para que coincida con tu diseño */
+  color: white;
+
+  & > div a {
     color: white;
-  
-    & > div a {
-      color: white;
-      margin-left: 1rem;
-      text-decoration: none;
+    margin-left: 1rem;
+    text-decoration: none;
+  }
+}
+
+.gender-selection {
+  text-align: center;
+  margin: 2rem 0;
+
+  .gender-button {
+    padding: 0.5rem 2rem;
+    margin: 0 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: darken(#d32f2f, 10%);
     }
   }
-  
-  .product-section {
-    padding: 2rem;
-  
-    h2 {
-      font-family: 'Roboto', sans-serif;
-      margin-bottom: 1.5rem;
-    }
-  
-    .products {
-      font-family: 'Roboto', sans-serif;
-      display: flex;
-      flex-wrap: wrap;
-  
-      .product {
-        width: 200px; // adjust size as needed
-        margin: 0.5rem;
-        text-align: center;
+}
+
+.product-section {
+  padding: 2rem;
+  display: flex;
+  justify-content: center; /* Centra los contenedores de productos horizontalmente */
+  flex-wrap: wrap; /* Permite que los contenedores de productos se envuelvan si no hay suficiente espacio */
+
+  h2 {
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 1.5rem;
+    text-align: center; /* Centra el texto horizontalmente */
+    width: 100%; /* Asegura que el encabezado ocupe toda la anchura */
+  }
+
+  .products {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center; /* Centra los productos dentro de .products */
+    flex-wrap: wrap;
+    width: 100%; /* Asegura que .products ocupe toda la anchura */
+
+    .product {
+      width: 200px; /* Ajusta el tamaño según sea necesario */
+      margin: 2rem;;
+      text-align: center;
+
+      img {
+        width: 100%; /* El ancho de la imagen será el mismo que el de .product */
+        height: auto; /* La altura se ajustará para mantener la proporción de aspecto */
+        max-height: 300px; /* Ajusta a la altura máxima deseada */
+        object-fit: cover; /* Esto asegurará que la imagen cubra el área asignada sin deformarse */
+        border-radius: 4px; /* Opcional, para dar un borde redondeado a las imágenes */
+      }
+
+      span {
+        display: block; /* Esto asegurará que cada span se muestre en una nueva línea */
+        margin-top: 0.5rem; /* Espacio entre la imagen y el texto */
       }
     }
   }
-  
+}

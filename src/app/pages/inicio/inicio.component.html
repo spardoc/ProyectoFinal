@@ -1,14 +1,28 @@
 <main>
-    <section class="product-section">
-      <h2>Las tendencias del momento</h2>
-      <div class="products">
-        <!-- Placeholder for products; you would generate this with *ngFor in a real app -->
-        <div class="product">
-          <img src="path_to_image" alt="Product Image">
-          <span>Camiseta de rayas</span>
-          <span>20$</span>
-        </div>
-        <!-- Repeat for other products -->
+  <section class="gender-selection">
+    <button class="gender-button" (click)="showMen()">HOMBRE</button>
+    <button class="gender-button" (click)="showWomen()">MUJER</button>
+  </section>
+
+  <section class="product-section men" *ngIf="showMenSection">
+    <h2>Hombre</h2>
+    <div class="products">
+      <div class="product" *ngFor="let product of menProducts">
+        <img [src]="product.img" alt="{{ product.nombre }}">
+        <span>{{ product.nombre }}</span>
+        <span>{{ product.precio | currency:'USD':'symbol' }}</span>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <section class="product-section women" *ngIf="showWomenSection">
+    <h2>Mujer</h2>
+    <div class="products">
+      <div class="product" *ngFor="let product of womenProducts">
+        <img [src]="product.img" alt="{{ product.nombre }}">
+        <span>{{ product.nombre }}</span>
+        <span>{{ product.precio | currency:'USD':'symbol' }}</span>
+      </div>
+    </div>
+  </section>
+</main>

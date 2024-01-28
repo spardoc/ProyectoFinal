@@ -2,55 +2,85 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 /* Set the font for the entire app */
-body {
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   font-family: 'Roboto', sans-serif;
 }
 
-.app-header {
-    background-color: #d32f2f;
-    color: white;
-    padding: 1rem 0; // Give some padding top and bottom
-    text-align: center; // Center the text (and thus, the title)
-  
-.header-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+body {
+  display: flex;
+  flex-direction: column;
 }
 
-  h1 {
-    font-size: 1.5rem;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-  }
+.content {
+  flex: 1; /* Esto permite que el contenido ocupe el espacio restante */
+  padding: 20px; /* Agrega un espacio para el contenido */
+}
 
-  .navigation-buttons {
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: flex-end; // Align buttons to the right
-    width: 100%; // Take full width to push content to the right
-    margin-top: 1rem; // Provide some space between the title and the buttons
-  }
+footer {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
 
-  .login-link, .cart-link {
-    font-family: 'Roboto', sans-serif;
-    color: white;
-    text-decoration: none;
-    margin-left: 1rem; // Give some space between the buttons
-  }
+
+
+.app-header {
+  background-color: #d32f2f;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.login-link, .cart-link {
+  color: white;
+  text-decoration: none;
+  margin-left: 1rem;
 }
 
 /* Rest of your styles... */
 
 .app-footer {
-font-family: 'Roboto', sans-serif;
   background-color: #333;
   color: white;
   text-align: center;
   padding: 1rem;
-  position: absolute;
-  bottom: 0;
   width: 100%;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1rem;
 }
 
 .top-nav {
@@ -67,26 +97,6 @@ font-family: 'Roboto', sans-serif;
     }
   }
   
-  .product-section {
-    font-family: 'Roboto', sans-serif;
-    padding: 2rem;
-  
-    h2 {
-      margin-bottom: 1.5rem;
-    }
-  
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-  
-      .product {
-        width: 200px; // adjust size as needed
-        margin: 0.5rem;
-        text-align: center;
-      }
-    }
-  }
-  
 /* Estilos generales */
 * {
     box-sizing: border-box;
@@ -94,10 +104,6 @@ font-family: 'Roboto', sans-serif;
     padding: 0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-}
 
 /* Estilos del encabezado */
 header {
@@ -163,10 +169,11 @@ nav ul li a:hover {
     color: #ff9900;
 }
 
-/* Estilos de la sección principal */
 main {
-padding: 20px;
-animation: fade-in 4s; /* Añadir la animación */
+  flex: 1;
+  display: flex; /* Flex container para los contenidos internos, si es necesario */
+  flex-direction: column; /* Dirección de los elementos hijo */
+  /* Asegúrate de que no haya un alto mínimo que interfiera aquí */
 }
 
 /* Definir la animación */
@@ -181,31 +188,12 @@ background-color: transparent;
 }
 }
 
-main h2 {
-    color: #333333;
-    font-size: 24px;
-    margin-bottom: 10px;
-}
 
-main p {
-    color: #666666;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-main img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
 
 /* Estilos del pie de página */
 footer {
-    background-color: #333333;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  margin-top: auto; /* Esto empujará el footer hacia abajo */
+  flex-shrink: 0;
 }
 
 footer p {

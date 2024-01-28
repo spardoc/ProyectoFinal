@@ -1,19 +1,28 @@
-<header class="app-header">
-  <div class="header-content">
-    <h1>Tienda de ropa Gallito</h1>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <h1>Tienda de ropa Gallito</h1>
+    </div>
+  </header>
+  <nav>
+    <ul>
+      <li *ngFor="let link of pages">
+        <a [routerLink]="link.path">
+          <i class="{{ link.icon }}"></i>
+          {{ link.titulo }}
+        </a>
+      </li>    
+    </ul>  
+  </nav>
+
+  <div class="content">
+    <main>
+      <router-outlet></router-outlet>
+      <!-- El contenido del enrutador se insertará aquí -->
+    </main>
   </div>
-</header>
-<nav>
-  <ul>
-    <li *ngFor="let link of pages">
-      <a [routerLink]="link.path">
-        <i class="{{ link.icon }}"></i>
-        {{ link.titulo }}
-      </a>
-    </li>    
-  </ul>  
-</nav>
-<router-outlet></router-outlet>
-<footer class="app-footer">
-  <p>Samu y Alex © 2023</p>
-</footer>
+
+  <footer class="app-footer">
+    <p>Samu y Alex © 2023</p>
+  </footer>
+</body>
