@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CartService } from './services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,24 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'ProyectoFinal';
 
+  isCartOpen = false;
+
   pages = [
     {titulo: 'Inicio', path: 'pages/inicio', icon: 'fas fa-home'},
-    {titulo: 'Carrito', path: 'pages/carrito', icon: 'fas fa-shopping-cart'},
+    {titulo: 'Carrito', icon: 'fas fa-shopping-cart'},
     {titulo: 'Login', path: 'pages/login', icon: 'fas fa-user'}
   ]
+  constructor(private cartService: CartService, private router: Router) { }
+
+  toggleCart() {
+    this.isCartOpen = !this.isCartOpen;
+  }
+
+  redirectToCheckout(): void {
+    
+    this.router.navigate(['pages/carrito2']); // Asegúrate de que '/checkout' sea la ruta correcta
+    this.isCartOpen = !this.isCartOpen;
+  }
+
+  
 }

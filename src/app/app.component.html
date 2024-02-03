@@ -1,19 +1,47 @@
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
 <body>
   <header class="app-header">
     <div class="header-content">
-      <h1>Tienda de ropa Gallito</h1>
+      <h1>
+        <span>T</span><span>i</span><span>e</span><span>n</span><span>d</span><span>a</span>&nbsp;
+        <span>d</span><span>e</span>&nbsp;
+        <span>r</span><span>o</span><span>p</span><span>a</span>&nbsp;
+        <span>G</span><span>a</span><span>l</span><span>l</span><span>i</span><span>t</span><span>o</span>
+      </h1>
     </div>
   </header>
   <nav>
     <ul>
       <li *ngFor="let link of pages">
-        <a [routerLink]="link.path">
+        <a *ngIf="link.path" [routerLink]="link.path">
           <i class="{{ link.icon }}"></i>
           {{ link.titulo }}
         </a>
-      </li>    
-    </ul>  
+        <a *ngIf="!link.path" (click)="link.titulo === 'Carrito' && toggleCart()">
+          <i class="{{ link.icon }}"></i>
+          {{ link.titulo }}
+        </a>
+      </li>   
+      
+    </ul>
+    <div class="cart-sidebar" [class.open]="isCartOpen">
+      <div class="close-btn" (click)="toggleCart()">×</div>
+      <h2>Shopping Bag</h2>
+      <div class="cart-content">
+        <i class="some-icon-class-for-bag"></i>
+        <p>Tu Shopping Bag está vacío.</p>
+        <!-- Aquí puedes añadir más contenido como listas de productos, etc. -->
+
+        <button (click)="redirectToCheckout()">Ir a la página de pago</button>
+      </div>
+      
+    </div>
+
+   
+     
   </nav>
+  <app-cart-sidebar></app-cart-sidebar>
 
   <div class="content">
     <main>

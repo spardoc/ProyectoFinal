@@ -40,4 +40,46 @@
       cursor: pointer;
     }
   }
+
+  .form-group {
+    margin-bottom: 1em;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: center; /* Centra los elementos */
+    align-items: center;
+    margin-top: 1em;
+    gap: 15px; /* Espacio entre botones */
+  }
+  
+  button {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+  }
+  
+  button:hover {
+    background-color: #555;
+  }
+  
+  /* Considera también estilos para dispositivos móviles y diferentes tamaños de pantalla */
+  @media (max-width: 600px) {
+    .form-actions {
+      flex-direction: column;
+    }
+  
+    .form-actions button {
+      width: 100%;
+      margin-top: 0.5em;
+    }
+  
+    /* Elimina el margen del primer botón para que no haya espacio adicional en la parte superior */
+    .form-actions button:first-child {
+      margin-top: 0;
+    }
+  }
   

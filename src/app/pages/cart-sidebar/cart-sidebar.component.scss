@@ -1,0 +1,46 @@
+.cart-sidebar {
+    position: fixed;      /* Fijado en la pantalla */
+    right: 0;             /* Alineado a la derecha */
+    top: 0;               /* Alineado a la parte superior */
+    width: 350px;         /* Ancho del sidebar */
+    height: 100%;         /* Altura completa de la ventana */
+    background-color: white; /* Color de fondo */
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1); /* Sombra para dar efecto 3D */
+    z-index: 100;         /* Asegura que se muestre por encima de otros elementos */
+    display: flex;        /* Utiliza flexbox para organizar los hijos */
+    flex-direction: column; /* Organiza los hijos verticalmente */
+    transform: translateX(100%); /* Inicia oculto fuera de la pantalla */
+    transition: transform 0.3s ease-in-out; /* Transición suave para mostrar/ocultar */
+  }
+  
+  /* Estilo para mostrar el sidebar */
+  .cart-sidebar.open {
+    transform: translateX(0); /* Mueve el sidebar a la posición visible */
+  }
+  
+  /* Estilos para el botón de cerrar y el título */
+  .cart-sidebar .close-btn {
+    font-size: 1.5em;
+    cursor: pointer;
+    margin: 1em;
+    align-self: flex-start;
+  }
+  
+  .cart-sidebar h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 0.5em;
+  }
+  
+  /* Contenido del carrito */
+  .cart-sidebar .cart-content {
+    flex-grow: 1; /* Hace que el contenido ocupe el espacio disponible */
+    padding: 1em;
+    text-align: center;
+  }
+  
+  .cart-sidebar .cart-content p {
+    margin-top: 2em;
+    color: grey;
+    font-size: 1em;
+  }

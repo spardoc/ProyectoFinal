@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { direcciones } from 'src/app/Domain/direcciones';
+import { Router } from '@angular/router';
+import { direcciones } from 'src/app/domain/direcciones';
+
 
 @Component({
   selector: 'app-carrito3',
@@ -10,7 +12,7 @@ import { direcciones } from 'src/app/Domain/direcciones';
 export class Carrito3Component implements OnInit {
   direccionForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private router: Router) {
     this.direccionForm = this.fb.group(new direcciones());
   }
 
@@ -20,6 +22,11 @@ export class Carrito3Component implements OnInit {
     const direccion = this.direccionForm.value as direcciones;
     // Aquí puedes realizar acciones como enviar la dirección al servidor o guardarla localmente.
     console.log('Dirección guardada:', direccion);
+  }
+
+  proceder(): void {
+    
+    this.router.navigate(['pages/pago']); // Asegúrate de que '/checkout' sea la ruta correcta
   }
 
   
