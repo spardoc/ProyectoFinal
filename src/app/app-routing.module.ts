@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'pages/carrito2', component: Carrito2Component },
   { path: 'pages/carrito3', component: Carrito3Component },
   { path: 'pages/pago', component: PagoComponent },
-  { path: 'pages/crearuser', component: CrearuserComponent }
+  { path: 'pages/crearuser', component: CrearuserComponent },
   { path: 'pages/carrito3', component: Carrito3Component },
   { path: 'producto/:codigo', component: ViewProductoComponent }
 ];

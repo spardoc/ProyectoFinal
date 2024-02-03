@@ -8,7 +8,6 @@ import { ProductosService } from 'src/app/services/productos.service';
   styleUrls: ['./inicio.component.scss']
 })
 export class InicioComponent implements OnInit {
-  products: Producto[]; // Asegúrate de inicializar 'products' si no se llena desde un servicio
   menProducts: Producto[] = [];
   womenProducts: Producto[] = [];
   showMenSection = true;
@@ -17,14 +16,8 @@ export class InicioComponent implements OnInit {
   constructor(private productosService: ProductosService) { }
 
 ngOnInit(): void {
-  this.products = this.productosService.getProducts();
-  this.filterProductsByGender();
 }
 
-  filterProductsByGender() {
-    this.menProducts = this.products.filter(p => p.categoria === 'men');
-    this.womenProducts = this.products.filter(p => p.categoria === 'women');
-  }
   
   showMen() {
     this.showMenSection = true;
