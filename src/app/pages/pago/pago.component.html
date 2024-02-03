@@ -1,0 +1,49 @@
+<form [formGroup]="pagoForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>
+        <input type="radio" formControlName="tipoTarjeta" value="credito"> Tarjeta de crédito
+      </label>
+      <label>
+        <input type="radio" formControlName="tipoTarjeta" value="debito"> Tarjeta de Débito
+      </label>
+    </div>
+  
+    <div>
+      <label for="numeroTarjeta">Número</label>
+      <input id="numeroTarjeta" type="text" formControlName="numeroTarjeta">
+    </div>
+  
+    <div>
+      <label for="nombreTarjeta">Nombre y Apellido como figura en la tarjeta</label>
+      <input id="nombreTarjeta" type="text" formControlName="nombreTarjeta">
+    </div>
+  
+    <div formGroupName="fechaVencimiento">
+      <label for="mesVencimiento">Fecha de Vencimiento</label>
+      <select id="mesVencimiento"  type="date" formControlName="mesVencimiento">
+        <!-- opciones de mes -->
+      </select>
+      <select formControlName="anoVencimiento">
+        <!-- opciones de año -->
+      </select>
+    </div>
+  
+    <div>
+      <label for="codigoSeguridad">Código de Seguridad</label>
+      <input id="codigoSeguridad" type="text" formControlName="codigoSeguridad">
+    </div>
+  
+    <div>
+      <label for="cedulaPagador">Cédula del pagador</label>
+      <input id="cedulaPagador" type="text" formControlName="cedulaPagador">
+    </div>
+  
+    <div>
+      <label for="cuotas">Cuotas disponibles</label>
+      <select id="cuotas" formControlName="cuotas">
+        <!-- opciones de cuotas -->
+      </select>
+    </div>
+  
+    <button type="submit" [disabled]="!pagoForm.valid">Pagar</button>
+  </form>

@@ -1,4 +1,5 @@
 .top-nav {
+  transition: color 0.5s ease;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
@@ -11,12 +12,16 @@
     text-decoration: none;
   }
 }
+.top-nav a:hover {
+  color: #ffd700; /* Cambia a un color brillante para la interactividad */
+}
 
 .gender-selection {
   text-align: center;
   margin: 2rem 0;
 
   .gender-button {
+    transition: transform 0.3s ease;
     padding: 0.5rem 2rem;
     margin: 0 1rem;
     font-size: 1rem;
@@ -28,6 +33,7 @@
 
     &:hover {
       background-color: darken(#d32f2f, 10%);
+      transform: scale(1.1);
     }
   }
 }
@@ -53,6 +59,7 @@
     width: 100%; /* Asegura que .products ocupe toda la anchura */
 
     .product {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       width: 200px; /* Ajusta el tamaño según sea necesario */
       margin: 2rem;;
       text-align: center;
@@ -70,5 +77,46 @@
         margin-top: 0.5rem; /* Espacio entre la imagen y el texto */
       }
     }
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+    }
+    .product:hover img {
+      transform: scale(1.05);
+      opacity: 0.9; /* Ligeramente transparente para un efecto dinámico */
+    }
+  }
+  @keyframes fadeInUp {
+    from {
+      transform: translate3d(0, 40px, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+  
+  .product {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0; /* Inicia con el producto invisible */
+  }
+  .product img {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.05);
+    }
+  }
+  
+  .gender-button:hover {
+    animation: pulse 1.5s infinite ease-in-out;
+    background-color: #d32f2f; /* Mantén el color original al inicio */
   }
 }

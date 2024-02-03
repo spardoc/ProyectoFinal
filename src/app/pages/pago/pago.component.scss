@@ -1,0 +1,65 @@
+/* Estilos generales del formulario */
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Estilos para las etiquetas */
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  /* Estilos para los campos de entrada */
+  input[type="text"],
+  select {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilos para los botones */
+  button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #4cae4c;
+  }
+  
+  /* Estilos para la radio buttons */
+  [type="radio"] {
+    margin-right: 5px;
+  }
+  
+  /* Estilos para la retroalimentación de error */
+  input.ng-invalid.ng-touched,
+  select.ng-invalid.ng-touched {
+    border-color: #e3342f;
+  }
+  
+  /* Estilos para la sección del radio button */
+  div > label {
+    margin-right: 10px;
+  }
+  
+  /* Estilos para el deshabilitado */
+  button[disabled] {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  

@@ -1,6 +1,23 @@
 /* Import a Google Font that closely matches your design */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+
+:root {
+  --primary-color: #d32f2f;
+  --secondary-color: #5c6bc0;
+  --hover-color: #ff9900;
+  --background-color: #f7f7f7;
+  --text-color: #333;
+  --footer-background: #333;
+  --link-color: white;
+  --hover-link-color: var(--hover-color);
+}
+
+
+.fadeIn {
+  animation: fade-in 0.5s ease-in-out;
+}
+
 /* Set the font for the entire app */
 html, body {
   height: 100%;
@@ -8,6 +25,8 @@ html, body {
   padding: 0;
   font-family: 'Roboto', sans-serif;
 }
+
+
 
 body {
   display: flex;
@@ -41,11 +60,58 @@ footer {
   align-items: center;
 }
 
-h1 {
+h1 span {
+  font-size: 1.5rem;
+  font-family: 'Georgia', serif;
+  display: inline-block;
+  margin-right: 0.2em; /* Ajusta el espaciado entre caracteres */
+  animation: jump 0.6s ease-in-out infinite;
+}
+
+h1 span:last-child {
+  margin-right: 0; /* Evita espacio extra después del último carácter */
+}
+
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+h1 span {
   font-size: 1.5rem;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  display: inline-block;
+  animation: jump 1.5s ease-in-out infinite;
 }
+
+
+h1 span:nth-child(1) { animation-delay: 0s; }
+h1 span:nth-child(2) { animation-delay: 0.1s; }
+h1 span:nth-child(3) { animation-delay: 0.2s; }
+h1 span:nth-child(4) { animation-delay: 0.3s; }
+h1 span:nth-child(5) { animation-delay: 0.4s; }
+h1 span:nth-child(6) { animation-delay: 0.5s; }
+h1 span:nth-child(7) { animation-delay: 0.6s; }
+h1 span:nth-child(8) { animation-delay: 0.7s; }
+h1 span:nth-child(9) { animation-delay: 0.8s; }
+h1 span:nth-child(10) { animation-delay: 0.9s; }
+h1 span:nth-child(11) { animation-delay: 1.0s; }
+h1 span:nth-child(12) { animation-delay: 1.1s; }
+h1 span:nth-child(13) { animation-delay: 1.2s; }
+h1 span:nth-child(14) { animation-delay: 1.3s; }
+h1 span:nth-child(15) { animation-delay: 1.4s; }
+h1 span:nth-child(16) { animation-delay: 1.5s; }
+h1 span:nth-child(17) { animation-delay: 1.6s; }
+h1 span:nth-child(18) { animation-delay: 1.7s; }
+h1 span:nth-child(19) { animation-delay: 1.8s; }
+h1 span:nth-child(20) { animation-delay: 1.9s; }
+h1 span:nth-child(21) { animation-delay: 2.0s; }
+
 
 .navigation-buttons {
   display: flex;
@@ -115,6 +181,12 @@ header {
   background-color: #84212c;
 }
 
+header, .top-nav {
+  background-color: var(--primary-color);
+  color: var(--link-color);
+  /* ... otros estilos ... */
+}
+
 header h1 {
   color: white;
   font-size: 32px;
@@ -163,10 +235,13 @@ nav ul li a {
     color: white;
     text-decoration: none;
     font-size: 18px;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 nav ul li a:hover {
     color: #ff9900;
+    color: var(--hover-link-color);
+    transform: translateY(-2px); /* Levanta ligeramente el enlace */
 }
 
 main {
@@ -226,4 +301,147 @@ img {
 .div-center {
   margin: 0 auto;
   width: 50%; /* o cualquier ancho fijo */
+}
+
+.cart-sidebar {
+  position: fixed;      /* Fijado en la pantalla */
+  right: 0;             /* Alineado a la derecha */
+  top: 0;               /* Alineado a la parte superior */
+  width: 350px;         /* Ancho del sidebar */
+  height: 100%;         /* Altura completa de la ventana */
+  background-color: white; /* Color de fondo */
+  box-shadow: -2px 0 8px rgba(0,0,0,0.1); /* Sombra para dar efecto 3D */
+  z-index: 100;         /* Asegura que se muestre por encima de otros elementos */
+  display: flex;        /* Utiliza flexbox para organizar los hijos */
+  flex-direction: column; /* Organiza los hijos verticalmente */
+  transform: translateX(100%); /* Inicia oculto fuera de la pantalla */
+  transition: transform 0.3s ease-in-out; /* Transición suave para mostrar/ocultar */
+}
+
+/* Estilo para mostrar el sidebar */
+.cart-sidebar.open {
+  transform: translateX(0); /* Mueve el sidebar a la posición visible */
+}
+
+/* Estilos para el botón de cerrar y el título */
+.cart-sidebar .close-btn {
+  font-size: 1.5em;
+  cursor: pointer;
+  margin: 1em;
+  align-self: flex-start;
+}
+
+.cart-sidebar h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-top: 0.5em;
+}
+
+/* Contenido del carrito */
+.cart-sidebar .cart-content {
+  flex-grow: 1; /* Hace que el contenido ocupe el espacio disponible */
+  padding: 1em;
+  text-align: center;
+}
+
+.cart-sidebar .cart-content p {
+  margin-top: 2em;
+  color: grey;
+  font-size: 1em;
+}
+
+.cart-sidebar .cart-content button {
+  background-color: #5c6bc0; /* Color de fondo del botón */
+  color: white; /* Color del texto */
+  border: none; /* No se muestra borde */
+  padding: 10px 20px; /* Espaciado interno */
+  font-size: 1em; /* Tamaño del texto */
+  font-weight: bold; /* Negrita para el texto */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor en forma de mano al pasar el ratón */
+  transition: background-color 0.3s, transform 0.1s; /* Transición suave para los efectos */
+  margin-top: 20px; /* Margen superior para separarlo del texto */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Sombra para dar efecto de elevación */
+}
+
+/* Efecto al pasar el ratón por encima */
+.cart-sidebar .cart-content button:hover {
+  background-color: #3949ab; /* Color de fondo un poco más oscuro */
+  transform: scale(1.05); /* Escala ligeramente más grande para efecto de resalte */
+}
+
+/* Efecto al hacer clic en el botón */
+.cart-sidebar .cart-content button:active {
+  transform: scale(0.95); /* Escala ligeramente más pequeña para efecto de pulsación */
+}
+
+/***********
+
+
+
+
+
+
+/* Botones con gradientes y sombras */
+
+
+
+
+/* Estilos de la sección de productos */
+.product-section {
+  background-color: var(--background-color);
+  /* ... otros estilos ... */
+}
+
+.product:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transform: scale(1.03); /* Aumenta ligeramente el tamaño del producto */
+}
+
+/* Pie de página */
+footer {
+  background-color: var(--footer-background);
+  color: var(--text-color);
+  /* ... otros estilos ... */
+}
+
+/* Animaciones y transiciones */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/****************************************
+/****************************************
+/****************************************
+/****************************************
+/* Botón del carrito con efecto de pulsación */
+.cart-sidebar .cart-content button {
+  background-color: var(--secondary-color);
+  /* ... otros estilos ... */
+}
+/****************************************
+
+/****************************************
+/****************************************
+
+/* Efecto de rebote para imágenes */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+img {
+  /* ... otros estilos ... */
+  animation: bounce 2s infinite;
 }
