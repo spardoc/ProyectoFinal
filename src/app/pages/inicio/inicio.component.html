@@ -4,6 +4,14 @@
     <button class="gender-button" (click)="showWomen()">MUJER</button>
   </section>
 
+  <div class="product" *ngFor="let product of menProducts">
+    <a [routerLink]="['/producto', product.codigo]">
+      <img [src]="product.img" alt="{{ product.nombre }}">
+      <span>{{ product.nombre }}</span>
+      <span>{{ product.precio | currency:'USD':'symbol' }}</span>
+    </a>
+  </div>
+
   <section class="product-section men" *ngIf="showMenSection">
     <h2>Hombre</h2>
     <div class="products">
