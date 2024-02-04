@@ -12,20 +12,25 @@ export class LoginComponent {
   
   cliente: Cliente = { correo: '', clave: '' };
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   iniciarSesion(): void {
     this.authService.iniciarSesion(this.cliente).subscribe(
       response => {
         // Actualiza el estado de autenticación
         this.authService.setAuthStatus(true);
-        console.log("Inicio de sesión correcto")
-        // Posiblemente redirigir al usuario al dashboard o a la página de productos
+        console.log("Inicio de sesión correcto");
+        // Redirigir al usuario al dashboard o a la página de productos
+        this.router.navigate(['pages/inicio']);
       },
       error => {
         console.error('Error al iniciar sesión', error);
-        // Manejar el error aquí, por ejemplo, mostrando un mensaje al usuario
+        // Manejar el error aquí
       }
     );
+  }
+
+  registrarse(): void {
+    this.router.navigate(['/pages/crearuser']); // Asegúrate de que esta ruta corresponda a tu ruta de registro
   }
 }

@@ -10,6 +10,7 @@ import { ProductosService } from 'src/app/services/productos.service';
   styleUrls: ['./view-producto.component.scss']
 })
 export class ViewProductoComponent implements OnInit {
+  cantidad: number = 1;
   codigoProducto: number = 0; // Inicializar con un valor por defecto
   producto: any;
 
