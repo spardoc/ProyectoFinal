@@ -11,6 +11,11 @@
     flex-direction: column; /* Organiza los hijos verticalmente */
     transform: translateX(100%); /* Inicia oculto fuera de la pantalla */
     transition: transform 0.3s ease-in-out; /* Transición suave para mostrar/ocultar */
+    font-family: 'Arial', sans-serif; /* Cambia a una fuente más moderna si lo deseas */
+    background: linear-gradient(to right, #f0f0f0, #e0e0e0); /* Fondo con gradiente */
+    border-left: 1px solid #ccc; /* Añade un borde sutil */
+    border-top-left-radius: 10px; /* Esquina redondeada */
+    border-bottom-left-radius: 10px; /* Esquina redondeada */
   }
   
   /* Estilo para mostrar el sidebar */
@@ -24,12 +29,14 @@
     cursor: pointer;
     margin: 1em;
     align-self: flex-start;
+    color: #333;
   }
   
   .cart-sidebar h2 {
     text-align: center;
     font-size: 2em;
     margin-top: 0.5em;
+    margin-bottom: 1em;
   }
   
   /* Contenido del carrito */
@@ -37,6 +44,7 @@
     flex-grow: 1; /* Hace que el contenido ocupe el espacio disponible */
     padding: 1em;
     text-align: center;
+    overflow-y: auto;
   }
   
   .cart-sidebar .cart-content p {
@@ -44,3 +52,19 @@
     color: grey;
     font-size: 1em;
   }
+
+  .cart-sidebar a, .cart-sidebar button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cart-sidebar a:hover, .cart-sidebar button:hover {
+    background-color: #0056b3;
+}

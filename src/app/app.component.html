@@ -42,15 +42,20 @@
       </div>
     
       <ng-template #emptyCart>
-        <p>Tu Shopping Bag está vacío.</p>
-      </ng-template>
-    
-      <button (click)="redirectToCheckout()">Ir a la página de pago</button>
-    </div>
-    
+        
+        <div class="contenedor">
+          <p>Tu Shopping Bag está vacío.</p>
+      </div>
+      
 
-   
+      </ng-template>
+      <div class="fixed-button-container">
+        <button (click)="redirectToCheckout()">Ir a la página de pago</button>
+      </div>
+    
      
+    </div>
+   
   </nav>
   <app-cart-sidebar></app-cart-sidebar>
 

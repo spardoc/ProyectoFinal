@@ -1,17 +1,40 @@
+/* Estilos para la imagen */
 img {
   width: 150px; /* Ancho fijo */
   height: 150px; /* Alto fijo */
   object-fit: cover; /* Esto asegura que la imagen se recorte para llenar el espacio definido */
+  display: block; /* Hace que la imagen sea un bloque para centrarla fácilmente */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
 }
 
+/* Contenedor de productos */
 .productos-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
+/* Estilos individuales de cada producto */
 .producto {
   flex: 0 0 30%; /* Asegura que cada producto tome cerca del 30% del espacio */
   margin: 10px;
-  /* Agrega cualquier otro estilo necesario para tu producto */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Centra el contenido (incluyendo texto e imagen) horizontalmente */
+}
+
+/* Estilos al pasar el ratón por encima */
+.producto:hover {
+  transform: scale(1.1);
+  z-index: 10; /* Asegura que el producto ampliado esté sobre los demás */
+}
+
+/* Difuminar los productos que no están siendo seleccionados */
+.productos-container:hover .producto {
+  opacity: 0.6;
+}
+
+.productos-container .producto:hover {
+  opacity: 1;
 }
