@@ -2,7 +2,7 @@ export class Producto {
     codigo?: number;
     nombre?: string;
     precio?: number;
-    talla?: string;
+    stock?: number;
     categoria?: string;
     img?: string;
 }

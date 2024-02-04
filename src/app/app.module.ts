@@ -14,6 +14,8 @@ import { CartSidebarComponent } from './pages/cart-sidebar/cart-sidebar.componen
 import { CrearuserComponent } from './pages/crearuser/crearuser.component';
 import { ViewProductoComponent } from './pages/view-producto/view-producto.component';
 
+import {HttpClientModule} from '@angular/common/http'; // CONSULTAS SQL
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,8 @@ import { ViewProductoComponent } from './pages/view-producto/view-producto.compo
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

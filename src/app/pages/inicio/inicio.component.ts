@@ -8,29 +8,13 @@ import { ProductosService } from 'src/app/services/productos.service';
   styleUrls: ['./inicio.component.scss']
 })
 export class InicioComponent implements OnInit {
-  menProducts: Producto[] = [];
-  womenProducts: Producto[] = [];
-  showMenSection = true;
-  showWomenSection = true;
+  productos: Producto[] = [];
 
-  constructor(private productosService: ProductosService) { }
+  constructor(private productoService: ProductosService) { }
 
-ngOnInit(): void {
-}
-
-  
-  showMen() {
-    this.showMenSection = true;
-    this.showWomenSection = false;
-  }
-
-  showWomen() {
-    this.showMenSection = false;
-    this.showWomenSection = true;
-  }
-
-  showBoth() {
-    this.showMenSection = true;
-    this.showWomenSection = true;
+  ngOnInit(): void {
+    this.productoService.getProductos().subscribe(data => {
+      this.productos = data;
+    });
   }
 }

@@ -11,7 +11,6 @@ import { ProductosService } from 'src/app/services/productos.service';
 })
 export class ViewProductoComponent {
 
-  constructor(private route: ActivatedRoute, private productosService: ProductosService) { }
 
   
 }
