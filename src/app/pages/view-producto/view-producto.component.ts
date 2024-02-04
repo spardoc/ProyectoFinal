@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Producto } from 'src/app/domain/producto';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductosService } from 'src/app/services/productos.service';
 
 @Component({
@@ -13,7 +15,8 @@ export class ViewProductoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productosService: ProductosService
+    private productosService: ProductosService,
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -32,5 +35,10 @@ export class ViewProductoComponent implements OnInit {
         // Manejar el caso en el que 'codigo' es nulo (por ejemplo, mostrar un mensaje de error)
       }
     });
+  }
+
+  agregarAlCarrito(producto: Producto) {
+    this.cartService.agregarAlCarrito(producto);
+    // Opcional: mostrar algún mensaje de confirmación al usuario
   }
 }

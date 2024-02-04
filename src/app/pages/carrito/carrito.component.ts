@@ -18,7 +18,4 @@ export class CarritoComponent {
     
     this.router.navigate(['pages/carrito2']); // Asegúrate de que '/checkout' sea la ruta correcta
   }
-
- 
-
 }

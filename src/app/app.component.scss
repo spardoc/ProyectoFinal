@@ -445,3 +445,26 @@ img {
   /* ... otros estilos ... */
   animation: bounce 2s infinite;
 }
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Espacio entre ítems */
+}
+
+.cart-item-image {
+  width: 80px; /* Ajusta el ancho de la imagen según necesites */
+  height: auto; /* Esto mantendrá la proporción de la imagen */
+  margin-right: 10px; /* Espacio entre la imagen y el texto */
+}
+
+.cart-item-details {
+  flex-grow: 1;
+}
+
+/* Si quieres que el texto esté alineado verticalmente al centro con la imagen */
+.cart-item-details h3,
+.cart-item-details p {
+  margin: 0;
+  line-height: 1.5; /* Ajusta la altura de la línea si es necesario */
+}

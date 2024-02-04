@@ -28,15 +28,26 @@
     <div class="cart-sidebar" [class.open]="isCartOpen">
       <div class="close-btn" (click)="toggleCart()">×</div>
       <h2>Shopping Bag</h2>
-      <div class="cart-content">
-        <i class="some-icon-class-for-bag"></i>
-        <p>Tu Shopping Bag está vacío.</p>
-        <!-- Aquí puedes añadir más contenido como listas de productos, etc. -->
-
-        <button (click)="redirectToCheckout()">Ir a la página de pago</button>
-      </div>
       
+      <div class="cart-content" *ngIf="cartService.getCartItems().length; else emptyCart">
+        <!-- Iterar sobre los productos en el carrito -->
+        <div class="cart-item" *ngFor="let item of cartService.getCartItems()">
+          <img [src]="item.imagen" alt="Imagen del Producto" class="cart-item-image">
+          <div class="cart-item-details">
+            <h3>{{ item.nombre }}</h3>
+            <p>Precio: ${{ item.precio }}</p>
+            <!-- Puedes añadir un botón para remover el producto del carrito si lo deseas -->
+          </div>
+        </div>
+      </div>
+    
+      <ng-template #emptyCart>
+        <p>Tu Shopping Bag está vacío.</p>
+      </ng-template>
+    
+      <button (click)="redirectToCheckout()">Ir a la página de pago</button>
     </div>
+    
 
    
      

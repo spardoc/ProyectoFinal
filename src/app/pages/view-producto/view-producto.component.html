@@ -3,12 +3,11 @@
     <div class="producto">
       <img [src]="producto.imagen" alt="Imagen del Producto" class="imagen-detalle-producto">
       <h3>{{ producto.nombre }}</h3>
-      <p>Código: {{ producto.codigo }}</p>
       <p>Precio: ${{ producto.precio }}</p>
     </div>
+    <button (click)="agregarAlCarrito(producto)">Añadir al Carrito</button>
   </div>
   
   <div *ngIf="!producto">
     <p>Producto no encontrado o cargando...</p>
   </div>
-  

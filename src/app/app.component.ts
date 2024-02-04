@@ -17,7 +17,9 @@ export class AppComponent {
     {titulo: 'Carrito', icon: 'fas fa-shopping-cart'},
     {titulo: 'Login', path: 'pages/login', icon: 'fas fa-user'}
   ]
-  constructor(private cartService: CartService, private router: Router) { }
+  constructor(public cartService: CartService, private router: Router) { 
+    this.cartService = cartService;
+  }
 
   toggleCart() {
     this.isCartOpen = !this.isCartOpen;
