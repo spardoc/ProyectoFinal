@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from './services/cart.service';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ProyectoFinal';
 
   isCartOpen = false;
@@ -19,6 +19,9 @@ export class AppComponent {
   ]
   constructor(public cartService: CartService, private router: Router) { 
     this.cartService = cartService;
+  }
+  ngOnInit(): void {
+    this.router.navigate(['pages/inicio'])
   }
 
   toggleCart() {
