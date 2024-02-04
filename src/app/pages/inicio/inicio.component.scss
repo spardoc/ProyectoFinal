@@ -1,122 +1,17 @@
-.top-nav {
-  transition: color 0.5s ease;
+img {
+  width: 150px; /* Ancho fijo */
+  height: 150px; /* Alto fijo */
+  object-fit: cover; /* Esto asegura que la imagen se recorte para llenar el espacio definido */
+}
+
+.productos-container {
   display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  background-color: #d32f2f; /* Ajusta el color para que coincida con tu diseño */
-  color: white;
-
-  & > div a {
-    color: white;
-    margin-left: 1rem;
-    text-decoration: none;
-  }
-}
-.top-nav a:hover {
-  color: #ffd700; /* Cambia a un color brillante para la interactividad */
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.gender-selection {
-  text-align: center;
-  margin: 2rem 0;
-
-  .gender-button {
-    transition: transform 0.3s ease;
-    padding: 0.5rem 2rem;
-    margin: 0 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    background-color: #d32f2f;
-    color: white;
-    border: none;
-    border-radius: 4px;
-
-    &:hover {
-      background-color: darken(#d32f2f, 10%);
-      transform: scale(1.1);
-    }
-  }
-}
-
-.product-section {
-  padding: 2rem;
-  display: flex;
-  justify-content: center; /* Centra los contenedores de productos horizontalmente */
-  flex-wrap: wrap; /* Permite que los contenedores de productos se envuelvan si no hay suficiente espacio */
-
-  h2 {
-    font-family: 'Roboto', sans-serif;
-    margin-bottom: 1.5rem;
-    text-align: center; /* Centra el texto horizontalmente */
-    width: 100%; /* Asegura que el encabezado ocupe toda la anchura */
-  }
-
-  .products {
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center; /* Centra los productos dentro de .products */
-    flex-wrap: wrap;
-    width: 100%; /* Asegura que .products ocupe toda la anchura */
-
-    .product {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 200px; /* Ajusta el tamaño según sea necesario */
-      margin: 2rem;;
-      text-align: center;
-
-      img {
-        width: 100%; /* El ancho de la imagen será el mismo que el de .product */
-        height: auto; /* La altura se ajustará para mantener la proporción de aspecto */
-        max-height: 300px; /* Ajusta a la altura máxima deseada */
-        object-fit: cover; /* Esto asegurará que la imagen cubra el área asignada sin deformarse */
-        border-radius: 4px; /* Opcional, para dar un borde redondeado a las imágenes */
-      }
-
-      span {
-        display: block; /* Esto asegurará que cada span se muestre en una nueva línea */
-        margin-top: 0.5rem; /* Espacio entre la imagen y el texto */
-      }
-    }
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.25);
-    }
-    .product:hover img {
-      transform: scale(1.05);
-      opacity: 0.9; /* Ligeramente transparente para un efecto dinámico */
-    }
-  }
-  @keyframes fadeInUp {
-    from {
-      transform: translate3d(0, 40px, 0);
-      opacity: 0;
-    }
-    to {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
-  }
-  
-  .product {
-    animation: fadeInUp 0.5s ease-out forwards;
-    opacity: 0; /* Inicia con el producto invisible */
-  }
-  .product img {
-    transition: transform 0.5s ease, opacity 0.5s ease;
-  }
-  @keyframes pulse {
-    0%, 100% {
-      transform: scale(1);
-      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
-    }
-    50% {
-      transform: scale(1.05);
-      box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.05);
-    }
-  }
-  
-  .gender-button:hover {
-    animation: pulse 1.5s infinite ease-in-out;
-    background-color: #d32f2f; /* Mantén el color original al inicio */
-  }
+.producto {
+  flex: 0 0 30%; /* Asegura que cada producto tome cerca del 30% del espacio */
+  margin: 10px;
+  /* Agrega cualquier otro estilo necesario para tu producto */
 }

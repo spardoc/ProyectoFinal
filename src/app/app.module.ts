@@ -26,7 +26,8 @@ import {HttpClientModule} from '@angular/common/http'; // CONSULTAS SQL
     Carrito3Component,
     PagoComponent,
     CartSidebarComponent,
-    CrearuserComponent
+    CrearuserComponent,
+    ViewProductoComponent
   ],
   imports: [
     BrowserModule,

@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'pages/pago', component: PagoComponent },
   { path: 'pages/crearuser', component: CrearuserComponent },
   { path: 'pages/carrito3', component: Carrito3Component },
-  { path: 'producto/:codigo', component: ViewProductoComponent }
+  { path: 'pages/inicio/:codigo', component: ViewProductoComponent }
 ];
 
 @NgModule({

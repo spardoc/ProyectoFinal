@@ -4,5 +4,5 @@ export class Producto {
     precio?: number;
     stock?: number;
     categoria?: string;
-    img?: string;
+    imagen?: string;
 }

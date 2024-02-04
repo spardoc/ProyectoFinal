@@ -1,1 +1,14 @@
-<p>view-producto works!</p>
+<div *ngIf="producto">
+    <h2>Detalles del Producto</h2>
+    <div class="producto">
+      <img [src]="producto.imagen" alt="Imagen del Producto" class="imagen-detalle-producto">
+      <h3>{{ producto.nombre }}</h3>
+      <p>Código: {{ producto.codigo }}</p>
+      <p>Precio: ${{ producto.precio }}</p>
+    </div>
+  </div>
+  
+  <div *ngIf="!producto">
+    <p>Producto no encontrado o cargando...</p>
+  </div>
+  
