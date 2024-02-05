@@ -40,6 +40,7 @@ export class ViewProductoComponent implements OnInit {
 
   agregarAlCarrito(producto: Producto) {
     this.cartService.agregarAlCarrito(producto);
+    window.alert("agregado al carrito");
     // Opcional: mostrar algún mensaje de confirmación al usuario
   }
 }
