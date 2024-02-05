@@ -21,11 +21,17 @@ export class LoginComponent {
         this.authService.setAuthStatus(true);
         console.log("Inicio de sesión correcto");
         // Redirigir al usuario al dashboard o a la página de productos
+        window.alert("Inicio de sesión correcto");
         this.router.navigate(['pages/inicio']);
+
+        
+        // Redireccionar a la página de inicio de sesión o a donde prefieras
+        
       },
       error => {
         console.error('Error al iniciar sesión', error);
         // Manejar el error aquí
+        window.alert("Error al iniciar sesión");
       }
     );
   }

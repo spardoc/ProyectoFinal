@@ -18,12 +18,14 @@ export class CrearuserComponent {
     this.clienteService.saveCliente(this.cliente).subscribe(
       response => {
         console.log("Cliente registrado con éxito", response);
+        window.alert("Cliente registrado con éxito");
         // Redireccionar a la página de inicio de sesión o a donde prefieras
         this.router.navigate(['pages/login']);
       },
       error => {
         console.error('Error al registrar el cliente', error);
         // Manejar el error aquí, por ejemplo, mostrando un mensaje al usuario
+        window.alert("Error al registrar el cliente");
       }
     );
   }
