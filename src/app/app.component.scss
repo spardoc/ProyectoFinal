@@ -537,3 +537,23 @@ button:active {
   text-align: center; /* Asegura que el texto dentro de <p> también esté centrado horizontalmente */
 }
 
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  left: 40px;
+  background-color: #25d366;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  line-height: 60px;
+  z-index: 100;
+}
+
+
+
+.whatsapp-float:hover {
+  background-color: #128c7e;
+}

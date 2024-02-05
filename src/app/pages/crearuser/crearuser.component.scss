@@ -1,72 +1,91 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f7f7f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-  }
-  
-  .form-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .form-header h2 {
-    font-size: 1.5rem;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-header p {
-    font-size: 0.9rem;
-    color: #666;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  label {
-    align-self: flex-start;
-    margin-bottom: 5px;
-  }
-  
-  input[type="email"],
-  input[type="text"],
-  input[type="tel"],
-  input[type="password"] {
-    width: calc(100% - 20px); /* Ajusta el ancho para compensar el padding */
-    padding: 10px;
-    margin-bottom: 15px; /* Espacio entre los campos */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    width: 100%; /* Hace que el botón se expanda al ancho completo del contenedor */
-    box-sizing: border-box; /* Asegura que el padding no afecte el ancho final */
-  }
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: #eaeaea; /* Un color de fondo ligeramente más claro para un contraste suave */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px;
+  padding: 30px; /* Padding más grande para una apariencia más espaciosa */
+  border: none; /* Eliminar el borde para un diseño más limpio */
+  border-radius: 10px; /* Bordes más redondeados */
+  background: #fff;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para un efecto 'elevado' */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para hover */
+}
+
+.form-container:hover {
+  transform: translateY(-5px); /* Efecto de 'levitación' al pasar el ratón por encima */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.form-header h2 {
+  font-size: 2rem; /* Tamaño más grande para el título */
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px; /* Más espacio después del título */
+  font-weight: bold; /* Fuente en negrita para mayor énfasis */
+}
+
+.form-header p {
+  font-size: 1rem; /* Tamaño más grande para la descripción */
+  color: #333; /* Color más oscuro para mejor legibilidad */
+  text-align: center;
+  margin-bottom: 30px; /* Más espacio después de la descripción */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Ajuste de ancho para alinear con los campos de entrada */
+}
+
+label {
+  align-self: flex-start;
+  margin-bottom: 10px; /* Más espacio entre la etiqueta y el campo de entrada */
+  font-weight: bold; /* Fuente en negrita para las etiquetas */
+  color: #333;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="tel"],
+input[type="password"] {
+  width: 100%; /* Ajuste de ancho para el input */
+  padding: 15px; /* Más espacio interior para una mejor legibilidad */
+  margin-bottom: 20px; /* Más espacio entre campos */
+  border: 2px solid #d3d3d3; /* Borde más grueso y de color suave */
+  border-radius: 8px; /* Bordes más redondeados */
+  font-size: 1rem;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra interior para un efecto sutil */
+  transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+input[type="email"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus {
+  border-color: #007bff; /* Resalta el borde al enfocar */
+  outline: none; /* Elimina el contorno predeterminado */
+}
+
+button {
+  padding: 15px 20px; /* Padding más grande para un botón más prominente */
+  background-color: #007bff; /* Color de fondo más vibrante */
+  color: #fff;
+  border: none;
+  border-radius: 8px; /* Bordes más redondeados */
+  cursor: pointer;
+  font-size: 1.1rem; /* Tamaño de fuente ligeramente más grande */
+  font-weight: bold; /* Fuente en negrita para el texto del botón */
+  transition: background-color 0.3s, transform 0.3s; /* Transición suave para color de fondo y transformación */
+}
   
   button:hover {
     background-color: #555;
