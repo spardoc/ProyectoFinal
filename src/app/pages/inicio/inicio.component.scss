@@ -1,6 +1,6 @@
 /* Estilos para la imagen */
 img {
-  width: 150px; /* Ancho fijo */
+  width: 140px; /* Ancho fijo */
   height: 150px; /* Alto fijo */
   object-fit: cover; /* Esto asegura que la imagen se recorte para llenar el espacio definido */
   display: block; /* Hace que la imagen sea un bloque para centrarla fácilmente */
@@ -16,11 +16,13 @@ img {
 
 /* Estilos individuales de cada producto */
 .producto {
+  position: relative;
   flex: 0 0 30%; /* Asegura que cada producto tome cerca del 30% del espacio */
-  margin: 10px;
+  margin: 11px;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  
+  
   text-align: center; /* Centra el contenido (incluyendo texto e imagen) horizontalmente */
 }
 
@@ -37,4 +39,31 @@ img {
 
 .productos-container .producto:hover {
   opacity: 1;
+}
+
+.info {
+  position: absolute;
+  bottom: 0; /* Ajusta según necesites para posicionar el cuadro */
+  left: 0; /* Ajusta según necesites para posicionar el cuadro */
+  width: 100%; /* Ajusta según el ancho de tu imagen */
+  background-color: rgba(0, 0, 0, 0.5); /* Ejemplo de color de fondo semi-transparente negro */
+  color: white; /* Color del texto */
+  padding: 10px; /* Espaciado dentro del cuadro */
+  text-align: center; /* Alinea el texto al centro */
+}
+
+.producto h3, .producto p {
+  margin: 0; /* Elimina márgenes por defecto para alinear mejor el texto */
+}
+.producto .info {
+  
+  padding: 10px 0; /* Espacio interior arriba y abajo */
+}
+
+.producto img {
+  
+
+  border-top-left-radius: 10px; /* Bordes redondeados en la parte superior de la imagen */
+  border-top-right-radius: 10px;
+  margin-bottom: 54px; /* Aumenta el espacio debajo de la imagen */
 }

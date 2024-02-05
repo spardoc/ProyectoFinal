@@ -2,6 +2,11 @@
   <div class="producto" *ngFor="let producto of productos">
     <button [routerLink]="['/pages/inicio', producto.codigo]">
       <img [src]="producto.imagen" alt="Imagen del Producto">
-      <h3>{{ producto.nombre }}</h3>
-      <p>Precio: ${{ producto.precio }}</p>
+      <div class="info">
+        <h3>{{ producto.nombre }}</h3>
+        <p>Precio: ${{ producto.precio }}</p>
+      </div>
+    </button>
+  </div>
+</div>
    
