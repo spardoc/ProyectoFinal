@@ -9,7 +9,9 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = environment.WS_PATH+ '/clientes';
+  private apiUrl = environment.WS_PATH + '/clientes';
+  private isAuthenticated = false;
+  private carritoCodigo: number | null = null; // Añade esta línea
 
   constructor(private http: HttpClient) { }
 
@@ -20,8 +22,6 @@ export class AuthService {
       
     return this.http.get(`${this.apiUrl}/login`, { params });
   }
-  // Propiedad para el estado de autenticación
-  private isAuthenticated = false;
 
   // Método para actualizar el estado de autenticación
   setAuthStatus(authenticated: boolean) {
@@ -31,5 +31,13 @@ export class AuthService {
   // Método para verificar el estado de autenticación
   getAuthStatus() {
     return this.isAuthenticated;
+  }
+
+  setCarritoCodigo(codigo: number) {
+    this.carritoCodigo = codigo;
+  }
+
+  getCarritoCodigo() {
+    return this.carritoCodigo;
   }
 }
