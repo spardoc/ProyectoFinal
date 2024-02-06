@@ -18,10 +18,10 @@ export class CartService {
 
   constructor(private authService: AuthService, private http: HttpClient) {}
 
-  agregarAlCarrito(producto: Producto) {
+  agregarAlCarrito(producto: Producto, cantidad: number) {
     if (this.authService.getAuthStatus()) {
       // Aquí se debe llamar al backend para sincronizar el carrito
-      this.agregarProductoAlCarritoBackend(producto).subscribe(response => {
+      this.agregarProductoAlCarritoBackend(producto, cantidad).subscribe(response => {
         // Manejar la respuesta del backend
         this.items.push(producto);
         // Aquí podrías emitir un evento o realizar otra lógica necesaria
@@ -39,8 +39,9 @@ export class CartService {
     return this.items;
   }
 
-  private agregarProductoAlCarritoBackend(producto: Producto): Observable<any> {
+  private agregarProductoAlCarritoBackend(producto: Producto, cantidad: number): Observable<any> {
     const carritoCodigo = this.authService.getCarritoCodigo();
+    const detalle = { producto: { codigo: producto.codigo }, cantidad };
     if (carritoCodigo) {
       const detalle = { producto: { codigo: producto.codigo }, cantidad: 1 };
       const url = `${environment.WS_PATH}/carritos/${carritoCodigo}/productos`;

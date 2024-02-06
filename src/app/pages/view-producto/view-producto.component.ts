@@ -38,9 +38,12 @@ export class ViewProductoComponent implements OnInit {
     });
   }
 
-  agregarAlCarrito(producto: Producto) {
-    this.cartService.agregarAlCarrito(producto);
-    window.alert("agregado al carrito");
-    // Opcional: mostrar algún mensaje de confirmación al usuario
+  agregarAlCarrito(producto: Producto, cantidad: number) {
+    if (cantidad <= 0) {
+      window.alert("La cantidad debe ser mayor a 0");
+      return;
+    }
+    this.cartService.agregarAlCarrito(producto, cantidad); // Asegúrate de que CartService maneje la cantidad
+    window.alert("Producto agregado al carrito");
   }
 }
