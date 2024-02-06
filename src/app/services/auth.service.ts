@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environmets/environments';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Cliente } from '../domain/cliente';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +13,22 @@ export class AuthService {
   private isAuthenticated = false;
   private carritoCodigo: number | null = null; // Añade esta línea
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
+  
 
   iniciarSesion(cliente: Cliente): Observable<any> {
     const params = new HttpParams()
       .set('correo', cliente.correo!)
-      .set('clave', cliente.clave!); // Asegurándose de que correo no es undefined
-      
-    return this.http.get(`${this.apiUrl}/login`, { params });
+      .set('clave', cliente.clave!);
+  
+    return this.http.get(`${this.apiUrl}/login`, { params }).pipe(
+      tap((response: any) => {
+        if (response.codigoCarrito) {
+          this.setCarritoCodigo(response.codigoCarrito);
+        }
+      })
+    );
   }
 
   // Método para actualizar el estado de autenticación

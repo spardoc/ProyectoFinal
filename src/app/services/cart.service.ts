@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Producto } from '../domain/producto';
@@ -9,6 +9,8 @@ import { environment } from '../environmets/environments';
   providedIn: 'root'
 })
 export class CartService {
+  private carritoCodigo: number | null = null;
+
   private items: Producto[] = [];
 
   private cartVisibleSource = new BehaviorSubject<boolean>(false);
@@ -38,7 +40,15 @@ export class CartService {
   }
 
   private agregarProductoAlCarritoBackend(producto: Producto): Observable<any> {
-    const detalle = { producto: { codigo: producto.codigo }, cantidad: 1 }; // Asumiendo cantidad 1 por defecto
-    return this.http.post(`${environment.WS_PATH}/carritos/[codigoCarrito]/productos`, detalle);
+    const carritoCodigo = this.authService.getCarritoCodigo();
+    if (carritoCodigo) {
+      const detalle = { producto: { codigo: producto.codigo }, cantidad: 1 };
+      const url = `${environment.WS_PATH}/carritos/${carritoCodigo}/productos`;
+      return this.http.post(url, detalle);
+    } else {
+      console.error('No se ha obtenido un código de carrito válido.');
+      return throwError('No se ha obtenido un código de carrito válido.');
+    }
   }
+  
 }

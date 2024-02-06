@@ -17,16 +17,25 @@ export class LoginComponent {
   iniciarSesion(): void {
     this.authService.iniciarSesion(this.cliente).subscribe(
       response => {
-        // Actualiza el estado de autenticación
-        this.authService.setAuthStatus(true);
-        console.log("Inicio de sesión correcto");
-        // Redirigir al usuario al dashboard o a la página de productos
-        window.alert("Inicio de sesión correcto");
-        this.router.navigate(['pages/inicio']);
+        if (response.mensaje === 'Acceso concedido') {
+          // Autenticación exitosa
+          this.authService.setAuthStatus(true);
+          console.log("Inicio de sesión correcto");
 
-        
-        // Redireccionar a la página de inicio de sesión o a donde prefieras
-        
+          // Obtén el código del carrito desde el AuthService
+          const codigoCarrito = this.authService.getCarritoCodigo();
+
+          // Realiza acciones con el código del carrito, si es necesario
+          console.log("Código del carrito:", codigoCarrito);
+
+          // Redirigir al usuario al dashboard o a la página de productos
+          window.alert("Inicio de sesión correcto");
+          this.router.navigate(['pages/inicio']);
+        } else {
+          // Manejar el caso de autenticación fallida
+          console.error('Error al iniciar sesión: Correo o contraseña incorrecta');
+          window.alert("Correo o contraseña incorrecta");
+        }
       },
       error => {
         console.error('Error al iniciar sesión', error);
