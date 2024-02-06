@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
     {titulo: 'Carrito', icon: 'fas fa-shopping-cart'},
     {titulo: 'Login', path: 'pages/login', icon: 'fas fa-user'}
   ]
+  
   constructor(public cartService: CartService, private authService: AuthService,private router: Router) { 
     this.cartService = cartService;
   }
@@ -53,6 +54,4 @@ export class AppComponent implements OnInit {
     this.router.navigate(['pages/carrito2']); // Asegúrate de que '/checkout' sea la ruta correcta
     this.isCartOpen = !this.isCartOpen;
   }
-
-  
 }

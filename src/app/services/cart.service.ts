@@ -17,14 +17,14 @@ export class CartService {
 
   private carrito!: Carrito;
   private carritoCodigo: number | null = null;
-
+  private clienteCodigo: number | null = null;
   private detalles: DetalleCarrito[] = [];
 
   private cartVisibleSource = new BehaviorSubject<boolean>(false);
   cartVisible = this.cartVisibleSource.asObservable();
 
   constructor(private authService: AuthService, private http: HttpClient) {
-    // Suscribirse al BehaviorSubject para actualizar el carrito cuando el usuario inicie sesión
+    this.carrito = new Carrito();
     this.authService.carritoCodigo$.subscribe(codigo => {
       if (codigo) {
         this.obtenerCarritoCliente(codigo).subscribe(carrito => {
@@ -37,19 +37,22 @@ export class CartService {
   agregarAlCarrito(producto: Producto, cantidad: number) {
     const carritoCodigo = this.authService.getCarritoCodigo();
     if (this.authService.getAuthStatus() && carritoCodigo) {
-      this.agregarProductoAlCarritoBackend(producto, cantidad, carritoCodigo).subscribe(response => {
-          if (response.mensaje === 'Producto agregado al carrito') {
-              this.detalles.push({ producto: producto, cantidad: cantidad });
-          } else {
-              console.error('Error en la respuesta del servidor', response);
-          }
-      }, error => {
-          console.error('Error al agregar al carrito', error);
-      });
+        this.agregarProductoAlCarritoBackend(producto, cantidad, carritoCodigo).subscribe(response => {
+            if (response.mensaje === 'Producto agregado al carrito') {
+                this.carrito.agregarProducto(producto, cantidad); // Asegúrate de que esta línea funcione como se espera
+                this.detalles = [...this.carrito.detalles]; // Actualiza los detalles
+                this.carritoActualizadoSource.next(this.carrito); // Notifica a los suscriptores
+            } else {
+                console.error('Error en la respuesta del servidor', response);
+            }
+        }, error => {
+            console.error('Error al agregar al carrito', error);
+        });
     } else {
-      console.error('Usuario no autenticado o código de carrito no disponible.');
+        console.error('Usuario no autenticado o código de carrito no disponible.');
     }
-  }
+}
+
 
   toggleCart() {
     this.cartVisibleSource.next(!this.cartVisibleSource.getValue());
@@ -83,33 +86,26 @@ export class CartService {
 
   public actualizarCarrito(carritoRecuperado: Carrito) {
     if (carritoRecuperado) {
-      // Obtener los items del carrito
-      const detalles = carritoRecuperado.detalles || [];
-  
-      // Obtener el código del cliente
-      const clienteCodigo = carritoRecuperado.clienteCodigo;
-  
-      // Actualizar el carrito y los items según sea necesario
-      this.carrito = carritoRecuperado;
-      this.detalles = JSON.parse(JSON.stringify(detalles));
-      
-      // Emitir un evento para que los componentes sepan que el carrito ha sido actualizado
-      this.carritoActualizadoSource.next(this.carrito);
-  
-      // Puedes realizar acciones adicionales aquí si es necesario
-      // Por ejemplo, almacenar el código del cliente en una propiedad del servicio
-      if (clienteCodigo !== undefined) {
-        this.carritoCodigo = clienteCodigo;
-      } else {
-        this.carritoCodigo = null; // Otra opción es asignar null si es undefined
-      }
+        // Reinicializar el carrito con los detalles recuperados
+        this.carrito = new Carrito();
+        carritoRecuperado.detalles
+            .filter(detalle => detalle.producto) // Filtrar los detalles que tienen un producto definido
+            .forEach(detalle => {
+                if (detalle.producto && detalle.cantidad) {
+                    this.carrito.agregarProducto(detalle.producto, detalle.cantidad);
+                }
+            });
+
+        // Actualizar el código del cliente
+        this.carrito.clienteCodigo = carritoRecuperado.clienteCodigo;
+
+        // Actualizar la lista de detalles en base al carrito actualizado
+        this.detalles = [...this.carrito.detalles];
+
+        // Notificar a los suscriptores
+        this.carritoActualizadoSource.next(this.carrito);
     } else {
-      console.log('ERROR AL RECUPERAR CARRITO');
+        console.log('ERROR AL RECUPERAR CARRITO');
     }
-  }
-  
-  
-  
-  
-  
+  } 
 }

@@ -40,12 +40,12 @@
       <h2>Shopping Bag</h2>
       
       <div class="cart-content" *ngIf="detalles.length > 0">
-        <div class="cart-item" *ngFor="let item of detalles">
-          <img [src]="item?.producto?.imagen" alt="Imagen del Producto" class="cart-item-image">
+        <div class="cart-item" *ngFor="let detalle of detalles">
+          <img [src]="detalle?.producto?.imagen" alt="Imagen del Producto" class="cart-item-image">
           <div class="cart-item-details">
-            <h3>{{ item?.producto?.nombre }}</h3>
-            <p>Cantidad: {{ item?.cantidad }}</p>
-            <p>Precio: ${{ item?.producto?.precio }}</p>
+            <h3>{{ detalle?.producto?.nombre }}</h3>
+            <p>Cantidad: {{ detalle?.cantidad }}</p>
+            <p>Precio: ${{ detalle?.producto?.precio }}</p>
           </div>
         </div>
   </div>
