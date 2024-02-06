@@ -1,5 +1,5 @@
 import { Producto } from "./producto";
-export class ItemCarrito {
+export class DetalleCarrito {
   producto ?: Producto;
   cantidad ?: number;
 }

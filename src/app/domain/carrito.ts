@@ -1,20 +1,20 @@
 import { Producto } from "./producto";
 
 export class Carrito {
-    items: { producto: Producto; cantidad: number }[] = [];
-    codigoCliente?: number;
+    detalles: { producto: Producto; cantidad: number }[] = [];
+    clienteCodigo?: number;
 
     agregarProducto(producto: Producto, cantidad: number) {
-        const itemExistente = this.items.find(item => item.producto.codigo === producto.codigo);
-        if (itemExistente) {
-            itemExistente.cantidad += cantidad;
+        const detalleExistente = this.detalles.find(detalle => detalle.producto.codigo === producto.codigo);
+        if (detalleExistente) {
+            detalleExistente.cantidad += cantidad;
         } else {
-            this.items.push({ producto, cantidad });
+            this.detalles.push({ producto, cantidad });
         }
     }
 
     removerProducto(codigoProducto: number) {
-        this.items = this.items.filter(item => item.producto.codigo !== codigoProducto);
+        this.detalles = this.detalles.filter(detalle => detalle.producto.codigo !== codigoProducto);
     }
 }
 

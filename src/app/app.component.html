@@ -39,17 +39,22 @@
       <div class="close-btn" (click)="toggleCart()">×</div>
       <h2>Shopping Bag</h2>
       
-      <div class="cart-content" *ngIf="cartService.getCartItems().length; else emptyCart">
-        <!-- Iterar sobre los productos en el carrito -->
-        <div class="cart-item" *ngFor="let item of cartService.getCartItems()">
-          <img [src]="item.imagen" alt="Imagen del Producto" class="cart-item-image">
+      <div class="cart-content" *ngIf="detalles.length > 0">
+        <div class="cart-item" *ngFor="let item of detalles">
+          <img [src]="item?.producto?.imagen" alt="Imagen del Producto" class="cart-item-image">
           <div class="cart-item-details">
-            <h3>{{ item.nombre }}</h3>
-            <p>Precio: ${{ item.precio }}</p>
-            <!-- Puedes añadir un botón para remover el producto del carrito si lo deseas -->
+            <h3>{{ item?.producto?.nombre }}</h3>
+            <p>Cantidad: {{ item?.cantidad }}</p>
+            <p>Precio: ${{ item?.producto?.precio }}</p>
           </div>
         </div>
-      </div>
+  </div>
+    
+    <div *ngIf="(detalles ?? []).length === 0">
+        <p>Tu carrito está vacío.</p>
+    </div>
+    
+    
     
       <ng-template #emptyCart>
         

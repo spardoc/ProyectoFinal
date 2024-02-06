@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from './services/cart.service';
 import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
+import { DetalleCarrito } from './domain/detalleCarrito';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'ProyectoFinal';
-
+  detalles: DetalleCarrito[] = [];
   isCartOpen = false;
 
   pages = [
@@ -17,14 +19,32 @@ export class AppComponent implements OnInit {
     {titulo: 'Carrito', icon: 'fas fa-shopping-cart'},
     {titulo: 'Login', path: 'pages/login', icon: 'fas fa-user'}
   ]
-  constructor(public cartService: CartService, private router: Router) { 
+  constructor(public cartService: CartService, private authService: AuthService,private router: Router) { 
     this.cartService = cartService;
   }
   ngOnInit(): void {
-    this.router.navigate(['pages/inicio'])
+    this.cartService.carritoActualizado$.subscribe(carrito => {
+      if (carrito) {
+        this.detalles = carrito.detalles || []; // Actualiza los items del carrito
+      }
+    });
+    if (this.authService.getAuthStatus()) {
+      const codigoCliente = this.authService.getCodigoCliente(); // Asegúrate de tener este método en AuthService
+      if (codigoCliente) {
+        this.cartService.obtenerCarritoCliente(codigoCliente).subscribe(carrito => {
+          // Aquí asumes que tienes un método para actualizar el estado del carrito en CartService
+          this.cartService.actualizarCarrito(carrito);
+        }, error => {
+          console.error('Error al recuperar el carrito: ', error);
+        });
+      }
+      
+    }
+    this.router.navigate(['pages/inicio']);
   }
 
   toggleCart() {
+    this.cartService.toggleCart();
     this.isCartOpen = !this.isCartOpen;
   }
 

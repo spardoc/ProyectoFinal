@@ -1,33 +1,53 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, tap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Producto } from '../domain/producto';
 import { environment } from '../environmets/environments';
+import { DetalleCarrito } from '../domain/detalleCarrito';
+import { Carrito } from '../domain/carrito';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+
+  private carritoActualizadoSource = new BehaviorSubject<Carrito | null>(null);
+  carritoActualizado$ = this.carritoActualizadoSource.asObservable();
+
+  private carrito!: Carrito;
   private carritoCodigo: number | null = null;
 
-  private items: Producto[] = [];
+  private detalles: DetalleCarrito[] = [];
 
   private cartVisibleSource = new BehaviorSubject<boolean>(false);
   cartVisible = this.cartVisibleSource.asObservable();
 
-  constructor(private authService: AuthService, private http: HttpClient) {}
+  constructor(private authService: AuthService, private http: HttpClient) {
+    // Suscribirse al BehaviorSubject para actualizar el carrito cuando el usuario inicie sesión
+    this.authService.carritoCodigo$.subscribe(codigo => {
+      if (codigo) {
+        this.obtenerCarritoCliente(codigo).subscribe(carrito => {
+          this.actualizarCarrito(carrito);
+        });
+      }
+    });
+  }
 
   agregarAlCarrito(producto: Producto, cantidad: number) {
-    if (this.authService.getAuthStatus()) {
-      // Aquí se debe llamar al backend para sincronizar el carrito
-      this.agregarProductoAlCarritoBackend(producto, cantidad).subscribe(response => {
-        // Manejar la respuesta del backend
-        this.items.push(producto);
-        // Aquí podrías emitir un evento o realizar otra lógica necesaria
+    const carritoCodigo = this.authService.getCarritoCodigo();
+    if (this.authService.getAuthStatus() && carritoCodigo) {
+      this.agregarProductoAlCarritoBackend(producto, cantidad, carritoCodigo).subscribe(response => {
+          if (response.mensaje === 'Producto agregado al carrito') {
+              this.detalles.push({ producto: producto, cantidad: cantidad });
+          } else {
+              console.error('Error en la respuesta del servidor', response);
+          }
+      }, error => {
+          console.error('Error al agregar al carrito', error);
       });
     } else {
-      // Si no está autenticado, manejar ese caso (p.ej., mostrando un mensaje)
+      console.error('Usuario no autenticado o código de carrito no disponible.');
     }
   }
 
@@ -35,21 +55,61 @@ export class CartService {
     this.cartVisibleSource.next(!this.cartVisibleSource.getValue());
   }
 
-  getCartItems(): Producto[] {
-    return this.items;
+  getCartItems(): DetalleCarrito[] {
+    return this.detalles;
+  }
+  
+
+  private agregarProductoAlCarritoBackend(producto: Producto, cantidad: number, carritoCodigo: number): Observable<any> {
+    const detalle = { producto: { codigo: producto.codigo }, cantidad: cantidad };
+    const url = `${environment.WS_PATH}/carritos/${carritoCodigo}/productos`;
+    return this.http.post(url, detalle);
+  }
+  
+
+  obtenerCarritoCliente(codigoCliente: number): Observable<Carrito> {
+    return this.http.get<Carrito>(`${environment.WS_PATH}/carritos/${codigoCliente}/carrito`).pipe(
+      tap(carrito => {
+        this.actualizarCarrito(carrito); // Llama a actualizarCarrito aquí para establecer los datos del carrito
+        console.log(carrito.detalles)
+
+      })
+    );
+  }
+  
+  getCarritoActual(): Carrito {
+    return this.carrito;
   }
 
-  private agregarProductoAlCarritoBackend(producto: Producto, cantidad: number): Observable<any> {
-    const carritoCodigo = this.authService.getCarritoCodigo();
-    const detalle = { producto: { codigo: producto.codigo }, cantidad };
-    if (carritoCodigo) {
-      const detalle = { producto: { codigo: producto.codigo }, cantidad: 1 };
-      const url = `${environment.WS_PATH}/carritos/${carritoCodigo}/productos`;
-      return this.http.post(url, detalle);
+  public actualizarCarrito(carritoRecuperado: Carrito) {
+    if (carritoRecuperado) {
+      // Obtener los items del carrito
+      const detalles = carritoRecuperado.detalles || [];
+  
+      // Obtener el código del cliente
+      const clienteCodigo = carritoRecuperado.clienteCodigo;
+  
+      // Actualizar el carrito y los items según sea necesario
+      this.carrito = carritoRecuperado;
+      this.detalles = JSON.parse(JSON.stringify(detalles));
+      
+      // Emitir un evento para que los componentes sepan que el carrito ha sido actualizado
+      this.carritoActualizadoSource.next(this.carrito);
+  
+      // Puedes realizar acciones adicionales aquí si es necesario
+      // Por ejemplo, almacenar el código del cliente en una propiedad del servicio
+      if (clienteCodigo !== undefined) {
+        this.carritoCodigo = clienteCodigo;
+      } else {
+        this.carritoCodigo = null; // Otra opción es asignar null si es undefined
+      }
     } else {
-      console.error('No se ha obtenido un código de carrito válido.');
-      return throwError('No se ha obtenido un código de carrito válido.');
+      console.log('ERROR AL RECUPERAR CARRITO');
     }
   }
+  
+  
+  
+  
   
 }
