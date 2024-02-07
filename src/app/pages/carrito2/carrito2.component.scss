@@ -1,29 +1,69 @@
-/* Carrito2Component CSS */
 .carrito-container {
-    /* Tus estilos para el contenedor del carrito */
+    /* Añade tus estilos para el contenedor principal aquí */
+  }
+  
+  .carrito-container h2 {
+    color: white;
+    
   }
   
   .cart-items {
     display: flex;
-    flex-direction: column; /* Alinea los items verticalmente */
-    gap: 20px; /* Espacio entre los items */
+    flex-direction: column;
+    gap: 10px; /* Esto añade espacio entre cada ítem del carrito */
   }
   
   .cart-item {
     display: flex;
-    flex-direction: column; /* Alinea los elementos del item verticalmente */
-    align-items: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Alinea los ítems del carrito verticalmente */
+    gap: 10px; /* Espacio entre la imagen y los detalles del producto */
   }
   
   .cart-item-image {
-    width: 100%; /* Hace que la imagen ocupe todo el ancho del item */
-    height: auto; /* Mantiene la proporción de la imagen */
-    object-fit: cover; /* Asegura que la imagen cubra el área asignada */
-    max-width: 200px; /* Límite de ancho para la imagen */
-    margin-bottom: 10px; /* Espacio entre la imagen y los detalles */
+    width: 100px; /* O el tamaño que prefieras */
+    height: auto;
+    margin-right: 15px; /* Espacio a la derecha de la imagen */
   }
   
   .cart-item-details {
-    text-align: center; /* Centra el texto de los detalles */
+    color: white;
+  }
+  
+  .cart-item-details h3 {
+    margin: 0; /* Elimina el margen por defecto del título */
+    /* Otros estilos que desees para el título */
+  }
+  
+  .cart-item-details p {
+    margin: 5px 0; /* Añade un pequeño espacio entre los párrafos */
+    /* Otros estilos que desees para los párrafos */
+  }
+  
+  button {
+    background-color: #4CAF50; /* Un color verde para el fondo */
+    color: white; /* Texto en blanco para contraste */
+    padding: 12px 24px; /* Espaciado interno para hacer el botón más grande */
+    border: none; /* Quitamos el borde por defecto */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    border-radius: 4px; /* Bordes redondeados */
+    font-size: 16px; /* Un tamaño de fuente legible */
+    transition: background-color 0.3s, transform 0.2s; /* Suaviza la transición de la animación */
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Un verde ligeramente más oscuro al pasar el cursor */
+    transform: translateY(-2px); /* Hace que el botón se desplace ligeramente hacia arriba */
+  }
+  
+  button:active {
+    transform: translateY(1px); /* Da la sensación de que el botón se está presionando */
+  }
+  .button-container {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    align-items: center; /* Centra el botón verticalmente si el contenedor tiene altura específica */
+    /* Añade altura si deseas centrar verticalmente y tu contenedor no tiene suficiente contenido */
+    /* height: 100vh; */
   }
   

@@ -1,4 +1,3 @@
-<!-- Carrito2Component HTML -->
 <div class="carrito-container">
     <h2>Mi Carrito</h2>
     <div class="cart-items" *ngIf="detalles.length > 0">
@@ -10,10 +9,12 @@
           <p>Precio: ${{ detalle?.producto?.precio }}</p>
         </div>
       </div>
+      -
     </div>
-    <button *ngIf="detalles.length > 0" (click)="generarFactura()">Generar Factura</button>
+    <div class="button-container" *ngIf="detalles.length > 0">
+        <button (click)="generarFactura()">Generar Factura</button>
+      </div>
     <div *ngIf="detalles.length === 0">
       <p>Tu carrito está vacío.</p>
     </div>
   </div>
-  

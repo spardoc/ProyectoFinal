@@ -321,6 +321,8 @@ img {
   transition: transform 0.3s ease-in-out; /* Transición suave para mostrar/ocultar */
   max-height: 100vh; /* Altura máxima para que no supere la altura de la pantalla */
   overflow-y: auto; 
+  display: flex;
+  flex-direction: column;
 }
 
 /* Estilo para mostrar el sidebar */
@@ -349,6 +351,8 @@ img {
   text-align: center;
   overflow-y: auto; /* Agrega un scrollbar si el contenido es muy largo */
   max-height: calc(100vh - 100px);
+  overflow-y: auto; /* Asegúrate de que solo esta parte se desplace */
+  flex-grow: 1; 
 }
 
 .cart-sidebar .cart-content p {
@@ -495,6 +499,8 @@ button:active {
   width: 100%;
   text-align: center;
   z-index: 1000;
+  padding: 10px; /* Añade un poco de espacio alrededor del botón si lo deseas */
+  margin-top: auto;
 }
 
 .fixed-button-container button {
