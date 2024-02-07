@@ -1,50 +1,19 @@
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carrito de Compras</title>
-
-</head>
-<body>
-
-<div class="shopping-cart">
-    <div class="cart-header">
-        <div>Producto(s)</div>
-        <div>Cantidad</div>
-        <div>Precio</div>
-    </div>
-    
-    <!-- Lista de productos -->
-    <div class="product-list">
-        <!-- Producto 1 -->
-        <div class="product-item">
-            <div class="product-image">
-                <img src="ruta/a/imagen-producto1.jpg" alt="Descripción del producto">
-            </div>
-            <div class="product-info">
-                <div class="product-name">Nombre del Producto 1</div>
-                <div class="product-quantity">
-                    <button>-</button>
-                    <span>1</span>
-                    <button>+</button>
-                </div>
-                <div class="product-price">$XX.XX</div>
-                <button class="product-remove">🗑</button>
-            </div>
+<!-- Carrito2Component HTML -->
+<div class="carrito-container">
+    <h2>Mi Carrito</h2>
+    <div class="cart-items" *ngIf="detalles.length > 0">
+      <div class="cart-item" *ngFor="let detalle of detalles">
+        <img [src]="detalle?.producto?.imagen" alt="Imagen del Producto" class="cart-item-image">
+        <div class="cart-item-details">
+          <h3>{{ detalle?.producto?.nombre }}</h3>
+          <p>Cantidad: {{ detalle?.cantidad }}</p>
+          <p>Precio: ${{ detalle?.producto?.precio }}</p>
         </div>
-        <!-- Repetir bloques como el anterior para más productos -->
+      </div>
     </div>
-    
-    <!-- Otras secciones como entrega, descuentos, etc. -->
-    <!-- ... -->
-    
-    <div class="checkout">
-        <button class="btn-entrega">ENTREGAR</button>
-       
-        <!-- ... -->
-        <button (click)="proceder()">te falto identificacion</button>
-        
+    <button *ngIf="detalles.length > 0" (click)="generarFactura()">Generar Factura</button>
+    <div *ngIf="detalles.length === 0">
+      <p>Tu carrito está vacío.</p>
     </div>
-</div>
-
-</body>
+  </div>
+  

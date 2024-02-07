@@ -16,8 +16,9 @@ export class CartService {
   carritoActualizado$ = this.carritoActualizadoSource.asObservable();
 
   private carrito!: Carrito;
+  private carritoCodigoSource = new BehaviorSubject<number | null>(null);
+  carritoCodigo$ = this.carritoCodigoSource.asObservable();
   private carritoCodigo: number | null = null;
-  private clienteCodigo: number | null = null;
   private detalles: DetalleCarrito[] = [];
 
   private cartVisibleSource = new BehaviorSubject<boolean>(false);
@@ -108,4 +109,13 @@ export class CartService {
         console.log('ERROR AL RECUPERAR CARRITO');
     }
   } 
+
+  setCarritoCodigo(codigo: number) {
+    this.carritoCodigo = codigo;
+    this.carritoCodigoSource.next(codigo);
+  }
+
+  getCarritoCodigo(): number | null {
+    return this.carritoCodigo;
+  }
 }

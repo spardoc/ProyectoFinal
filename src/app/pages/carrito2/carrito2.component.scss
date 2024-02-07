@@ -1,81 +1,29 @@
-body {
-    font-family: Arial, sans-serif;
-}
-
-.shopping-cart {
-    width: 80%;
-    margin: auto;
-    border: 1px solid #ccc;
-    padding: 20px;
-}
-
-.cart-header {
+/* Carrito2Component CSS */
+.carrito-container {
+    /* Tus estilos para el contenedor del carrito */
+  }
+  
+  .cart-items {
     display: flex;
-    justify-content: space-between;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #ccc;
-    margin-bottom: 20px;
-}
-
-.product-list {
-    margin-bottom: 20px;
-}
-
-.product-item {
+    flex-direction: column; /* Alinea los items verticalmente */
+    gap: 20px; /* Espacio entre los items */
+  }
+  
+  .cart-item {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.product-image img {
-    width: 50px; /* Ajustar según sea necesario */
-}
-
-.product-info {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-}
-
-.product-name {
-    margin-left: 10px;
-}
-
-.product-quantity button {
-    background: none;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-}
-
-.product-quantity span {
-    margin: 0 10px;
-}
-
-.product-price {
-    margin-right: 10px;
-}
-
-.product-remove {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.checkout {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.btn-entrega, .btn-recoger, .btn-checkout {
-    padding: 10px 20px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    background-color: #f8f8f8;
-}
-
-.btn-checkout {
-    background-color: #333;
-    color: white;
-}
+    flex-direction: column; /* Alinea los elementos del item verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+  }
+  
+  .cart-item-image {
+    width: 100%; /* Hace que la imagen ocupe todo el ancho del item */
+    height: auto; /* Mantiene la proporción de la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra el área asignada */
+    max-width: 200px; /* Límite de ancho para la imagen */
+    margin-bottom: 10px; /* Espacio entre la imagen y los detalles */
+  }
+  
+  .cart-item-details {
+    text-align: center; /* Centra el texto de los detalles */
+  }
+  
