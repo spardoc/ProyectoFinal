@@ -27,7 +27,8 @@ export class CartService {
   constructor(private authService: AuthService, private http: HttpClient) {
     this.carrito = new Carrito();
     this.authService.carritoCodigo$.subscribe(codigo => {
-      if (codigo) {
+      if (codigo !== null) {
+        this.carritoCodigo = codigo; // Ahora asignamos el valor dentro de la suscripción
         this.obtenerCarritoCliente(codigo).subscribe(carrito => {
           this.actualizarCarrito(carrito);
         });
@@ -35,23 +36,26 @@ export class CartService {
     });
   }
 
-  agregarAlCarrito(producto: Producto, cantidad: number) {
-    const carritoCodigo = this.authService.getCarritoCodigo();
+  public agregarAlCarrito(producto: Producto, cantidad: number) {
+  // Se suscribe al BehaviorSubject que contiene el código del carrito
+  this.authService.getCarritoCodigo().subscribe(carritoCodigo => {
     if (this.authService.getAuthStatus() && carritoCodigo) {
-        this.agregarProductoAlCarritoBackend(producto, cantidad, carritoCodigo).subscribe(response => {
-            if (response.mensaje === 'Producto agregado al carrito') {
-                this.carrito.agregarProducto(producto, cantidad); // Asegúrate de que esta línea funcione como se espera
-                this.detalles = [...this.carrito.detalles]; // Actualiza los detalles
-                this.carritoActualizadoSource.next(this.carrito); // Notifica a los suscriptores
-            } else {
-                console.error('Error en la respuesta del servidor', response);
-            }
-        }, error => {
-            console.error('Error al agregar al carrito', error);
-        });
+      // Se mantiene la lógica existente, pero ahora dentro del suscribe
+      this.agregarProductoAlCarritoBackend(producto, cantidad, carritoCodigo).subscribe(response => {
+        if (response.mensaje === 'Producto agregado al carrito') {
+          this.carrito.agregarProducto(producto, cantidad);
+          this.detalles = [...this.carrito.detalles];
+          this.carritoActualizadoSource.next(this.carrito);
+        } else {
+          console.error('Error en la respuesta del servidor', response);
+        }
+      }, error => {
+        console.error('Error al agregar al carrito', error);
+      });
     } else {
-        console.error('Usuario no autenticado o código de carrito no disponible.');
+      console.error('Usuario no autenticado o código de carrito no disponible.');
     }
+  });
 }
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DetalleCarrito } from 'src/app/domain/detalleCarrito';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { FacturasService } from 'src/app/services/facturas.service';
 
@@ -14,7 +15,8 @@ export class Carrito2Component implements OnInit {
 
   constructor(
     private carritoService: CartService,
-    private facturaService: FacturasService
+    private facturaService: FacturasService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -23,8 +25,9 @@ export class Carrito2Component implements OnInit {
   }
 
   generarFactura() {
-    const codigoCarrito = this.carritoService.getCarritoCodigo(); // Asegúrate de tener este método en CarritoService
+    this.authService.getCarritoCodigo().subscribe(codigoCarrito => {
     if (codigoCarrito) {
+      console.log('CODIGO CARRITO PARA GENERAR FACTURA', codigoCarrito)
       this.facturaService.generarFactura(codigoCarrito).subscribe(
         factura => {
           console.log('Factura generada:', factura);
@@ -39,7 +42,6 @@ export class Carrito2Component implements OnInit {
       console.error('No hay un código de carrito disponible');
       // Manejar el caso de que no haya un código de carrito
     }
+  });  
   }
-
-  
 }

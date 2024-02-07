@@ -59,8 +59,8 @@ export class AuthService {
     this.carritoCodigoSource.next(codigo);
   }
 
-  getCarritoCodigo() {
-    return this.carritoCodigo;
+  public getCarritoCodigo(): Observable<number | null> {
+    return this.carritoCodigo$;
   }
 
   getCodigoCliente() {
