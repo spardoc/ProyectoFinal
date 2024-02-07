@@ -66,3 +66,52 @@ button:hover {
   font-size: 18px;
   color: #666;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cantidad {
+  font-size: 20px;
+  color: #ffffff;
+  /* otros estilos */
+}
+
+@keyframes cantidad-aumenta {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+.cantidad-aumenta {
+  animation: cantidad-aumenta 0.5s ease;
+}
+
+h2 {
+  color: #bcb8b8; /* Un color oscuro para el texto */
+  font-family: 'Arial', sans-serif; /* Cambia la fuente si tienes alguna preferida */
+  text-align: center; /* Centra el título */
+  margin-bottom: 20px; /* Espacio debajo del título */
+}
+h2 {
+  /* estilos previos */
+  font-size: 24px; /* Ajusta el tamaño según prefieras */
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.2); /* Sombra sutil */
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h2 {
+  /* estilos previos */
+  animation: slideDown 1s ease forwards;
+}
+

@@ -4,9 +4,20 @@
     <img [src]="producto.imagen" alt="Imagen del Producto" class="imagen-detalle-producto">
     <h3>{{ producto.nombre }}</h3>
     <p>Precio: ${{ producto.precio }}</p>
-    <input type="number" [(ngModel)]="cantidad" min="1"> <!-- Campo para la cantidad -->
+    
+      <div [class]="cantidadClase">{{ cantidad }}</div>
+<button (click)="aumentarCantidad()">+</button> -
+<button (click)="disminuirCantidad()">-</button>
+    
+   
   </div>
-  <button (click)="agregarAlCarrito(producto, cantidad)">Añadir al Carrito</button>
+  <div></div>-
+  <div class="container">
+
+    <button (click)="agregarAlCarrito(producto, cantidad)">Añadir al Carrito</button>
+  </div>
+  
+  
 </div>
 
 <div *ngIf="!producto">

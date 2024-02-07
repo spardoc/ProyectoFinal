@@ -11,6 +11,7 @@ import { ProductosService } from 'src/app/services/productos.service';
 })
 export class ViewProductoComponent implements OnInit {
   cantidad: number = 1;
+  cantidadClase = 'cantidad';
   codigoProducto: number = 0; // Inicializar con un valor por defecto
   producto: any;
 
@@ -45,5 +46,23 @@ export class ViewProductoComponent implements OnInit {
     }
     this.cartService.agregarAlCarrito(producto, cantidad); // Asegúrate de que CartService maneje la cantidad
     window.alert("Producto agregado al carrito");
+  }
+
+  aumentarCantidad() {
+    this.cantidad++;
+    this.cantidadClase = 'cantidad cantidad-aumenta';
+
+    setTimeout(() => {
+      this.cantidadClase = 'cantidad';
+    }, 500); // tiempo igual a la duración de la animación
+  }
+
+  disminuirCantidad() {
+    this.cantidad--;
+    this.cantidadClase = 'cantidad cantidad-aumenta';
+
+    setTimeout(() => {
+      this.cantidadClase = 'cantidad';
+    }, 500); // tiempo igual a la duración de la animación
   }
 }

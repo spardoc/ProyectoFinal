@@ -319,6 +319,8 @@ img {
   flex-direction: column; /* Organiza los hijos verticalmente */
   transform: translateX(100%); /* Inicia oculto fuera de la pantalla */
   transition: transform 0.3s ease-in-out; /* Transición suave para mostrar/ocultar */
+  max-height: 100vh; /* Altura máxima para que no supere la altura de la pantalla */
+  overflow-y: auto; 
 }
 
 /* Estilo para mostrar el sidebar */
@@ -345,6 +347,8 @@ img {
   flex-grow: 1; /* Hace que el contenido ocupe el espacio disponible */
   padding: 1em;
   text-align: center;
+  overflow-y: auto; /* Agrega un scrollbar si el contenido es muy largo */
+  max-height: calc(100vh - 100px);
 }
 
 .cart-sidebar .cart-content p {
@@ -557,3 +561,5 @@ button:active {
 .whatsapp-float:hover {
   background-color: #128c7e;
 }
+
+

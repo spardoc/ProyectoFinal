@@ -23,10 +23,12 @@
           <i class="{{ link.icon }}"></i>
           {{ link.titulo }}
         </a>
-        <a *ngIf="!link.path" (click)="link.titulo === 'Carrito' && toggleCart()">
-          <i class="{{ link.icon }}"></i>
-          {{ link.titulo }}
-        </a>
+        <div class="sidebar">
+          <a *ngIf="!link.path" (click)="link.titulo === 'Carrito' && toggleCart()">
+            <i class="{{ link.icon }}"></i>
+            {{ link.titulo }}
+          </a>
+        </div>
       </li>   
       
     </ul>
