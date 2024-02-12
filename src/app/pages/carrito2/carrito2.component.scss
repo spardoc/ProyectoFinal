@@ -1,69 +1,204 @@
 .carrito-container {
-    /* Añade tus estilos para el contenedor principal aquí */
-  }
-  
-  .carrito-container h2 {
-    color: white;
+  /* Asegúrate de que el contenedor del carrito tenga un padding y, si lo deseas, un color de fondo específico */
+  padding: 20px;
+  background-color: #f4f4f4; /* Color de fondo gris claro para destacar las celdas blancas */
+}
+
+.carrito-container h2 {
+  color: #333; /* Cambio de blanco a un color oscuro para mayor legibilidad en fondo claro */
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Mantiene el espacio entre cada ítem del carrito */
+}
+
+.cart-item {
+  display: flex;
+  align-items: center; /* Alinea los ítems del carrito verticalmente */
+  gap: 10px; /* Espacio entre la imagen y los detalles del producto */
+  background-color: white; /* Fondo blanco para cada producto */
+  border: 1px solid #ff0000; /* Borde sutil para las celdas */
+  border-radius: 8px; /* Esquinas redondeadas para las celdas */
+  padding: 10px; /* Espaciado interno para separar el contenido de los bordes */
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1); /* Sombra sutil para dar profundidad */
+}
+
+.cart-item-image {
+  width: 100px; /* O el tamaño que prefieras */
+  height: auto;
+  margin-right: 15px; /* Espacio a la derecha de la imagen */
+}
+
+.cart-item-details {
+  color: #333; /* Cambio de blanco a negro para mayor legibilidad */
+}
+
+.cart-item-details h3, .cart-item-details p {
+  margin: 5px 0; /* Añade un pequeño espacio entre los párrafos */
+  /* Considera ajustar los estilos de texto para mejorar la legibilidad */
+}
+
+button {
+  background-color: #4CAF50; /* Un color verde para el fondo */
+  color: white; /* Texto en blanco para contraste */
+  padding: 12px 24px; /* Espaciado interno para hacer el botón más grande */
+  border: none; /* Quitamos el borde por defecto */
+  cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+  border-radius: 4px; /* Bordes redondeados */
+  font-size: 16px; /* Un tamaño de fuente legible */
+  transition: background-color 0.3s, transform 0.2s; /* Suaviza la transición de la animación */
+  margin-top: 20px; /* Asegura un espaciado adecuado */
+}
+
+button:hover {
+  background-color: #45a049; /* Un verde ligeramente más oscuro al pasar el cursor */
+  transform: translateY(-2px); /* Hace que el botón se desplace ligeramente hacia arriba */
+}
+
+button:active {
+  transform: translateY(1px); /* Da la sensación de que el botón se está presionando */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Centra el botón horizontalmente */
+  /* Ajustes adicionales si necesitas centrar verticalmente */
+}
+
+
+
+
+
+
+
+
+
+$particles: 60;
+$width: 500;
+$height: 400;
+
+// Create the explosion...
+$box-shadow: ();
+$box-shadow2: ();
+@for $i from 0 through $particles {
+  $box-shadow: $box-shadow,
+               random($width)-$width / 2 + px
+               random($height)-$height / 1.2 + px
+               hsl(random(360), 100, 50);
+  $box-shadow2: $box-shadow2, 0 0 #fff
+}
+@mixin keyframes ($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-ms-keyframes #{$animationName} {
+        @content;
+    }
+
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin animation-delay ($settings) {
+    -moz-animation-delay: $settings;
+    -webkit-animation-delay: $settings;
+    -o-animation-delay: $settings;
+    -ms-animation-delay: $settings;
+    animation-delay: $settings;
+}
+
+@mixin animation-duration ($settings) {
+    -moz-animation-duration: $settings;
+    -webkit-animation-duration: $settings;
+    -o-animation-duration: $settings;
+    -ms-animation-duration: $settings;
+    animation-duration: $settings;
+}
+
+@mixin animation ($settings) {
+    -moz-animation: $settings;
+    -webkit-animation: $settings;
+    -o-animation: $settings;
+    -ms-animation: $settings;
+    animation: $settings;
+}
+
+@mixin transform ($settings) {
+    transform: $settings;
+    -moz-transform: $settings;
+    -webkit-transform: $settings;
+    -o-transform: $settings;
+    -ms-transform: $settings;
+}
+
+body {
+  margin:0;
+  padding:0;
+  background: #003366;
+  overflow: hidden;
+}
+
+.pyro > .before, .pyro > .after {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  box-shadow: $box-shadow2;
+  @include animation((1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards));
+}
     
+.pyro > .after {
+  @include animation-delay((1.25s, 1.25s, 1.25s));
+  @include animation-duration((1.25s, 1.25s, 6.25s));
+}
+        
+@include keyframes(bang) {
+  to {
+    box-shadow:$box-shadow;
   }
+}
+    
+@include keyframes(gravity)  {
+  to {
+    @include transform(translateY(200px));
+    opacity: 0;
+  }
+}
+    
+@include keyframes(position) {
+  0%, 19.9% {
+    margin-top: 10%;
+    margin-left: 40%;
+  }
+  20%, 39.9% {
+    margin-top: 40%;
+    margin-left: 30%;
+  }
+  40%, 59.9% {  
+    margin-top: 20%;
+    margin-left: 70%
+  }
+  60%, 79.9% {  
+    margin-top: 30%;
+    margin-left: 20%;
+  }
+  80%, 99.9% {  
+    margin-top: 30%;
+    margin-left: 80%;
+  }
+}
+
   
-  .cart-items {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Esto añade espacio entre cada ítem del carrito */
-  }
-  
-  .cart-item {
-    display: flex;
-    align-items: center; /* Alinea los ítems del carrito verticalmente */
-    gap: 10px; /* Espacio entre la imagen y los detalles del producto */
-  }
-  
-  .cart-item-image {
-    width: 100px; /* O el tamaño que prefieras */
-    height: auto;
-    margin-right: 15px; /* Espacio a la derecha de la imagen */
-  }
-  
-  .cart-item-details {
-    color: white;
-  }
-  
-  .cart-item-details h3 {
-    margin: 0; /* Elimina el margen por defecto del título */
-    /* Otros estilos que desees para el título */
-  }
-  
-  .cart-item-details p {
-    margin: 5px 0; /* Añade un pequeño espacio entre los párrafos */
-    /* Otros estilos que desees para los párrafos */
-  }
-  
-  button {
-    background-color: #4CAF50; /* Un color verde para el fondo */
-    color: white; /* Texto en blanco para contraste */
-    padding: 12px 24px; /* Espaciado interno para hacer el botón más grande */
-    border: none; /* Quitamos el borde por defecto */
-    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
-    border-radius: 4px; /* Bordes redondeados */
-    font-size: 16px; /* Un tamaño de fuente legible */
-    transition: background-color 0.3s, transform 0.2s; /* Suaviza la transición de la animación */
-    margin-top: 20px;
-  }
-  
-  button:hover {
-    background-color: #45a049; /* Un verde ligeramente más oscuro al pasar el cursor */
-    transform: translateY(-2px); /* Hace que el botón se desplace ligeramente hacia arriba */
-  }
-  
-  button:active {
-    transform: translateY(1px); /* Da la sensación de que el botón se está presionando */
-  }
-  .button-container {
-    display: flex;
-    justify-content: center; /* Centra el botón horizontalmente */
-    align-items: center; /* Centra el botón verticalmente si el contenedor tiene altura específica */
-    /* Añade altura si deseas centrar verticalmente y tu contenedor no tiene suficiente contenido */
-    /* height: 100vh; */
-  }
   

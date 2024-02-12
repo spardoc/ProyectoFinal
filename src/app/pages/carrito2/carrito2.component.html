@@ -1,17 +1,27 @@
 <div class="carrito-container">
   <h2>Mi Carrito</h2>
   <div class="cart-items" *ngIf="detalles.length > 0">
+    <div class="pyro">
+      <div class="before"></div>
+      <div class="after"></div>
+    </div>
+    
     <div class="cart-item" *ngFor="let detalle of detalles">
+
+      
       <img [src]="detalle?.producto?.imagen" alt="Imagen del Producto" class="cart-item-image">
       <div class="cart-item-details">
+        
         <h3>{{ detalle?.producto?.nombre }}</h3>
         <p>Cantidad: {{ detalle?.cantidad }}</p>
         <p>Precio unitario: ${{ detalle?.producto?.precio }}</p>
         <p>Subtotal: ${{ (detalle?.cantidad || 0) * (detalle?.producto?.precio || 0) | number:'1.2-2' }}</p>
         <p>IVA (12%): ${{ ((detalle?.cantidad || 0) * (detalle?.producto?.precio || 0)) * 0.12 | number:'1.2-2' }}</p>
         <p>Total con IVA: ${{ ((detalle?.cantidad || 0) * (detalle?.producto?.precio || 0)) * 1.12 | number:'1.2-2' }}</p>
+        
       </div>
     </div>
+    
   </div>
   <div *ngIf="detalles.length > 0">
     <h3>Total del Carrito (con IVA): ${{ getTotalConIVA() | number:'1.2-2' }}</h3>
@@ -21,3 +31,5 @@
     <p>Tu carrito está vacío.</p>
   </div>
 </div>
+
+

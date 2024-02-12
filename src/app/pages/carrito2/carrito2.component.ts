@@ -4,6 +4,8 @@ import { DetalleCarrito } from 'src/app/domain/detalleCarrito';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { FacturasService } from 'src/app/services/facturas.service';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-carrito2',
@@ -45,6 +47,8 @@ export class Carrito2Component implements OnInit {
     } else {
       console.error('No hay un código de carrito disponible');
     }
+
+    
   }
 
   getTotalConIVA(): number {
@@ -54,6 +58,8 @@ export class Carrito2Component implements OnInit {
       return total + totalConIVA;
     }, 0);
   }
+
+  
   
   
 }
