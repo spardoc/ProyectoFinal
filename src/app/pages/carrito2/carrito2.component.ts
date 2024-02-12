@@ -46,5 +46,14 @@ export class Carrito2Component implements OnInit {
       console.error('No hay un código de carrito disponible');
     }
   }
+
+  getTotalConIVA(): number {
+    return this.detalles.reduce((total, detalle) => {
+      const subtotal = (detalle.cantidad || 0) * (detalle.producto?.precio || 0);
+      const totalConIVA = subtotal * 1.12; // Asume un IVA del 12%
+      return total + totalConIVA;
+    }, 0);
+  }
+  
   
 }
