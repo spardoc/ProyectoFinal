@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/domain/cliente';
+import { DetalleCarrito } from 'src/app/domain/detalleCarrito';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -13,7 +14,13 @@ export class LoginComponent {
   
   cliente: Cliente = { correo: '', clave: '' };
 
-  constructor(private authService: AuthService, private router: Router, private cartService: CartService) { }
+  detalles: DetalleCarrito[] = [];
+
+
+  constructor(public authService: AuthService, private router: Router, private cartService: CartService) 
+  {
+    this.detalles = this.cartService.getCartItems();
+  }
 
   iniciarSesion(): void {
     this.authService.iniciarSesion(this.cliente).subscribe(
@@ -22,7 +29,7 @@ export class LoginComponent {
           // Autenticación exitosa
           this.authService.setAuthStatus(true);
           console.log("Inicio de sesión correcto");
-  
+          this.router.navigate(['/pages/inicio']);
           // Si se proporciona el código del carrito en la respuesta, úsalo
           const codigoCarrito = response.codigoCarrito;
           if (codigoCarrito) {
@@ -44,7 +51,7 @@ export class LoginComponent {
           }
   
           // Redirigir al usuario al dashboard o a la página de productos
-          this.router.navigate(['pages/inicio']);
+          //this.router.navigate(['pages/inicio']);
         } else {
           // Manejar el caso de autenticación fallida
           console.error('Error al iniciar sesión: Correo o contraseña incorrecta');
@@ -63,4 +70,11 @@ export class LoginComponent {
   registrarse(): void {
     this.router.navigate(['/pages/crearuser']); // Asegúrate de que esta ruta corresponda a tu ruta de registro
   }
+
+  cerrarSesion(): void {
+    this.authService.cerrarSesion();
+    this.cartService.vaciarCarrito(); // Asegúrate de llamar a vaciarCarrito aquí
+    this.router.navigate(['/pages/inicio']); // O la ruta que tengas para la página de inicio de sesión
+  }
+  
 }

@@ -12,10 +12,11 @@ export class AuthService {
   private carritoCodigoSource = new BehaviorSubject<number | null>(null);
   carritoCodigo$ = this.carritoCodigoSource.asObservable();
 
+  // Esta variable almacena el último valor conocido del código del carrito.
   private carritoCodigo: number | null = null;
   private apiUrl = environment.WS_PATH + '/clientes';
   private isAuthenticated = false;
-  private codigoCliente: number | null = null; // Añade esta línea
+  private codigoCliente: number | null = null;
 
   constructor(private http: HttpClient) {
   }
@@ -30,15 +31,26 @@ export class AuthService {
         tap((response: any) => {
           if (response.codigoCarrito) {
             this.setCarritoCodigo(response.codigoCarrito);
+            console.log('CODIGO CARRITO EN AUTH SERVICE> ',response.codigoCarrito)
           }
           // Asegúrate de manejar también el código del cliente
           if (response.codigoCliente) {
             this.setCodigoCliente(response.codigoCliente);
+            console.log('CODIGO CLIENTE EN AUTH SERVICE> ',response.codigoCliente)
           }
         })
       );
   }
-
+  
+  cerrarSesion(): void {
+    console.log('Cerrando sesión en AuthService');
+    this.isAuthenticated = false;
+    this.carritoCodigoSource.next(null);
+    // Considera resetear también el codigoCliente si es necesario
+    this.codigoCliente = null;
+    // Notificar a suscriptores sobre el cambio de autenticación, si tienes un observable para ello
+  }
+  
 
   private obtenerCarritoCliente(codigoCliente: number): Observable<any> {
     return this.http.get<any>(`${environment.WS_PATH}/carritos/${codigoCliente}/carrito`);
@@ -70,4 +82,10 @@ export class AuthService {
   private setCodigoCliente(codigo: number) {
     this.codigoCliente = codigo;
   }
+
+  getCarritoCodigoSincrono(): number | null {
+    return this.carritoCodigo;
+  }
+
+
 }

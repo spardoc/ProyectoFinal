@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DetalleCarrito } from 'src/app/domain/detalleCarrito';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -17,6 +18,7 @@ export class Carrito2Component implements OnInit {
     private carritoService: CartService,
     private facturaService: FacturasService,
     private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -25,23 +27,24 @@ export class Carrito2Component implements OnInit {
   }
 
   generarFactura() {
-    this.authService.getCarritoCodigo().subscribe(codigoCarrito => {
+    const codigoCarrito = this.authService.getCarritoCodigoSincrono(); // Suponiendo que este método ahora devuelve un valor directamente
+    
     if (codigoCarrito) {
-      console.log('CODIGO CARRITO PARA GENERAR FACTURA', codigoCarrito)
+      console.log('CODIGO CARRITO PARA GENERAR FACTURA', codigoCarrito);
       this.facturaService.generarFactura(codigoCarrito).subscribe(
         factura => {
           console.log('Factura generada:', factura);
-          // Aquí puedes redirigir al usuario a otra página o mostrar un mensaje de éxito
+          this.carritoService.vaciarCarrito(); // Vacía el carrito después de generar la factura
+          this.detalles = []; // Actualiza la vista para reflejar el carrito vacío
+          this.router.navigate(['pages/inicio']);
         },
         error => {
           console.error('Error al generar la factura:', error);
-          // Manejar errores aquí
         }
       );
     } else {
       console.error('No hay un código de carrito disponible');
-      // Manejar el caso de que no haya un código de carrito
     }
-  });  
   }
+  
 }

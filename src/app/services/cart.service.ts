@@ -37,26 +37,27 @@ export class CartService {
   }
 
   public agregarAlCarrito(producto: Producto, cantidad: number) {
-  // Se suscribe al BehaviorSubject que contiene el código del carrito
-  this.authService.getCarritoCodigo().subscribe(carritoCodigo => {
-    if (this.authService.getAuthStatus() && carritoCodigo) {
-      // Se mantiene la lógica existente, pero ahora dentro del suscribe
-      this.agregarProductoAlCarritoBackend(producto, cantidad, carritoCodigo).subscribe(response => {
-        if (response.mensaje === 'Producto agregado al carrito') {
-          this.carrito.agregarProducto(producto, cantidad);
-          this.detalles = [...this.carrito.detalles];
-          this.carritoActualizadoSource.next(this.carrito);
-        } else {
-          console.error('Error en la respuesta del servidor', response);
-        }
-      }, error => {
-        console.error('Error al agregar al carrito', error);
-      });
-    } else {
+    // Comprobar primero si el usuario está autenticado y si hay un código de carrito disponible.
+    if (!this.authService.getAuthStatus() || !this.carritoCodigo) {
       console.error('Usuario no autenticado o código de carrito no disponible.');
+      
+      return;
     }
-  });
-}
+  
+    // Ya que estás seguro de que hay un código de carrito, puedes proceder a agregar el producto al carrito.
+    this.agregarProductoAlCarritoBackend(producto, cantidad, this.carritoCodigo).subscribe(response => {
+      if (response.mensaje === 'Producto agregado al carrito') {
+        this.carrito.agregarProducto(producto, cantidad);
+        this.detalles = [...this.carrito.detalles];
+        this.carritoActualizadoSource.next(this.carrito);
+      } else {
+        console.error('Error en la respuesta del servidor', response);
+      }
+    }, error => {
+      console.error('Error al agregar al carrito', error);
+    });
+  }
+  
 
 
   toggleCart() {
@@ -79,8 +80,6 @@ export class CartService {
     return this.http.get<Carrito>(`${environment.WS_PATH}/carritos/${codigoCliente}/carrito`).pipe(
       tap(carrito => {
         this.actualizarCarrito(carrito); // Llama a actualizarCarrito aquí para establecer los datos del carrito
-        console.log(carrito.detalles)
-
       })
     );
   }
@@ -90,6 +89,7 @@ export class CartService {
   }
 
   public actualizarCarrito(carritoRecuperado: Carrito) {
+    console.log('Llamando a actualizar carrito')
     if (carritoRecuperado) {
         // Reinicializar el carrito con los detalles recuperados
         this.carrito = new Carrito();
@@ -122,4 +122,13 @@ export class CartService {
   getCarritoCodigo(): number | null {
     return this.carritoCodigo;
   }
+
+  vaciarCarrito() {
+    this.detalles = [];
+    this.carrito = new Carrito(); // Reinicia el carrito
+    this.carritoActualizadoSource.next(this.carrito); // Notifica a suscriptores
+    console.log('Carrito vaciado en CartService');
+  }
+  
+  
 }
