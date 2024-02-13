@@ -16,13 +16,14 @@
 
 .cart-item {
   display: flex;
-  align-items: center; /* Alinea los ítems del carrito verticalmente */
-  gap: 10px; /* Espacio entre la imagen y los detalles del producto */
-  background-color: white; /* Fondo blanco para cada producto */
-  border: 1px solid #ff0000; /* Borde sutil para las celdas */
-  border-radius: 8px; /* Esquinas redondeadas para las celdas */
-  padding: 10px; /* Espaciado interno para separar el contenido de los bordes */
-  box-shadow: 0px 2px 4px rgba(0,0,0,0.1); /* Sombra sutil para dar profundidad */
+  flex-wrap: wrap; /* Permitirá que los elementos se ajusten según sea necesario */
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
 }
 
 .cart-item-image {
@@ -32,24 +33,62 @@
 }
 
 .cart-item-details {
-  color: #333; /* Cambio de blanco a negro para mayor legibilidad */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Asegura que tome el espacio disponible */
 }
 
+.detail-boxes {
+  display: flex;
+  gap: 10px;
+}
+
+.detail-box, .total-box {
+  align-self: flex-start;
+  padding: 5px;
+  background-color: #f0f0f0; /* Un ligero fondo gris para diferenciar los cuadros */
+  border: 1px solid #ccc; /* Un borde sutil */
+  border-radius: 5px; /* Bordes redondeados para estética */
+}
+
+.total-box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.total-carrito {
+  text-align: right;
+}
+
+.contenedor-del-h3 { /* Reemplaza esto con la clase o selector real de tu contenedor */
+  display: flex;
+  justify-content: flex-end; /* Alinea los elementos hijos al final (derecha) */
+}
+.total-carrito-container {
+  text-align: right; /* Alinea el contenido a la derecha */
+  width: 100%; /* Asegura que el div ocupe todo el ancho disponible */
+}
+
+
+
 .cart-item-details h3, .cart-item-details p {
+  
   margin: 5px 0; /* Añade un pequeño espacio entre los párrafos */
   /* Considera ajustar los estilos de texto para mejorar la legibilidad */
 }
 
 button {
-  background-color: #4CAF50; /* Un color verde para el fondo */
+  background-color: #445783; /* Un color verde para el fondo */
   color: white; /* Texto en blanco para contraste */
-  padding: 12px 24px; /* Espaciado interno para hacer el botón más grande */
+  padding: 12px 12px; /* Espaciado interno para hacer el botón más grande */
   border: none; /* Quitamos el borde por defecto */
   cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
   border-radius: 4px; /* Bordes redondeados */
   font-size: 16px; /* Un tamaño de fuente legible */
   transition: background-color 0.3s, transform 0.2s; /* Suaviza la transición de la animación */
   margin-top: 20px; /* Asegura un espaciado adecuado */
+  
 }
 
 button:hover {
@@ -199,6 +238,5 @@ body {
     margin-left: 80%;
   }
 }
-
   
   

@@ -1,24 +1,27 @@
-<div *ngIf="producto">
+<div *ngIf="producto" class="detalle-producto-container">
   <h2>Detalles del Producto</h2>
   <div class="producto">
     <img [src]="producto.imagen" alt="Imagen del Producto" class="imagen-detalle-producto">
-    <h3>{{ producto.nombre }}</h3>
-    <p>Precio: ${{ producto.precio }}</p>
-    <p>Descripcion: {{ producto.descripcion }}</p>
-    <div [class]="cantidadClase">{{ cantidad }}</div>
-    <button (click)="aumentarCantidad()">+</button> -
-    <button (click)="disminuirCantidad()">-</button>
-    <div>
-      <label for="talla">Talla:</label>
-      <select [(ngModel)]="talla">
-        <option value="XS">XS</option>
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
-      </select>
+    <div class="detalles-producto">
+      <h3>{{ producto.nombre }}</h3>
+      <p>Precio: ${{ producto.precio }}</p>
+      <p>Descripcion: {{ producto.descripcion }}</p>
+      <div [class]="cantidadClase">{{ cantidad }}</div>
+      <button (click)="aumentarCantidad()">+</button> 
+      <button (click)="disminuirCantidad()">-</button>
+      <div class="selector-talla">
+        <label for="talla">Talla:</label>
+        <select [(ngModel)]="talla">
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+        </select>
+      </div>
+      <div class="container">
+        <button (click)="agregarAlCarrito(producto, cantidad, talla)">Añadir al Carrito</button>
+      </div>
     </div>
-    <div class="container">
-      <button (click)="agregarAlCarrito(producto, cantidad, talla)">Añadir al Carrito</button>
-    </div>
+  </div>
 </div>
