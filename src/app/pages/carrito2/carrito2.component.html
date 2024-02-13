@@ -15,6 +15,7 @@
         <h3>{{ detalle?.producto?.nombre }}</h3>
         <p>Cantidad: {{ detalle?.cantidad }}</p>
         <p>Precio unitario: ${{ detalle?.producto?.precio }}</p>
+        <p>Talla elegida: {{ detalle?.talla }}</p>
         <p>Subtotal: ${{ (detalle?.cantidad || 0) * (detalle?.producto?.precio || 0) | number:'1.2-2' }}</p>
         <p>IVA (12%): ${{ ((detalle?.cantidad || 0) * (detalle?.producto?.precio || 0)) * 0.12 | number:'1.2-2' }}</p>
         <p>Total con IVA: ${{ ((detalle?.cantidad || 0) * (detalle?.producto?.precio || 0)) * 1.12 | number:'1.2-2' }}</p>

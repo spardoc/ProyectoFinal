@@ -15,6 +15,7 @@ export class ViewProductoComponent implements OnInit {
   cantidadClase = 'cantidad';
   codigoProducto: number = 0; // Inicializar con un valor por defecto
   producto: any;
+  talla: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -42,7 +43,7 @@ export class ViewProductoComponent implements OnInit {
     });
   }
 
-  agregarAlCarrito(producto: Producto, cantidad: number) {
+  agregarAlCarrito(producto: Producto, cantidad: number, talla: string) {
     if (cantidad <= 0) {
       window.alert("La cantidad debe ser mayor a 0");
       return;
@@ -55,8 +56,8 @@ export class ViewProductoComponent implements OnInit {
         window.alert("Por favor, inicia sesión para agregar productos al carrito");
       }
       else {
-        this.cartService.agregarAlCarrito(producto, cantidad); // Asegúrate de que CartService maneje la cantidad
-        window.alert("Producto agregado al carrito");
+        this.cartService.agregarAlCarrito(producto, cantidad, talla);
+        window.alert("Producto agregado al carrito con talla: " + talla);
         this.router.navigate(['/pages/inicio']);
       }
     }

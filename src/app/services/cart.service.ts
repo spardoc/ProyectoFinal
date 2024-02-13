@@ -36,18 +36,17 @@ export class CartService {
     });
   }
 
-  public agregarAlCarrito(producto: Producto, cantidad: number) {
-    // Comprobar primero si el usuario está autenticado y si hay un código de carrito disponible.
+  public agregarAlCarrito(producto: Producto, cantidad: number, talla: string) {
+    // Comprueba si el usuario está autenticado y si hay un código de carrito disponible.
     if (!this.authService.getAuthStatus() || !this.carritoCodigo) {
       console.error('Usuario no autenticado o código de carrito no disponible.');
-      
       return;
     }
-  
-    // Ya que estás seguro de que hay un código de carrito, puedes proceder a agregar el producto al carrito.
-    this.agregarProductoAlCarritoBackend(producto, cantidad, this.carritoCodigo).subscribe(response => {
+
+    // Agrega la talla al detalle.
+    this.agregarProductoAlCarritoBackend(producto, cantidad, talla, this.carritoCodigo).subscribe(response => {
       if (response.mensaje === 'Producto agregado al carrito') {
-        this.carrito.agregarProducto(producto, cantidad);
+        this.carrito.agregarProducto(producto, cantidad, talla); // Incluye la talla aquí.
         this.detalles = [...this.carrito.detalles];
         this.carritoActualizadoSource.next(this.carrito);
       } else {
@@ -69,8 +68,9 @@ export class CartService {
   }
   
 
-  private agregarProductoAlCarritoBackend(producto: Producto, cantidad: number, carritoCodigo: number): Observable<any> {
-    const detalle = { producto: { codigo: producto.codigo }, cantidad: cantidad };
+  private agregarProductoAlCarritoBackend(producto: Producto, cantidad: number, talla: string, carritoCodigo: number): Observable<any> {
+    // Incluye la talla en el objeto detalle.
+    const detalle = { producto: { codigo: producto.codigo }, cantidad: cantidad, talla: talla };
     const url = `${environment.WS_PATH}/carritos/${carritoCodigo}/productos`;
     return this.http.post(url, detalle);
   }
@@ -97,7 +97,7 @@ export class CartService {
             .filter(detalle => detalle.producto) // Filtrar los detalles que tienen un producto definido
             .forEach(detalle => {
                 if (detalle.producto && detalle.cantidad) {
-                    this.carrito.agregarProducto(detalle.producto, detalle.cantidad);
+                    this.carrito.agregarProducto(detalle.producto, detalle.cantidad, detalle.talla);
                 }
             });
 

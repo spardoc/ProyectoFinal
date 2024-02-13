@@ -4,22 +4,21 @@
     <img [src]="producto.imagen" alt="Imagen del Producto" class="imagen-detalle-producto">
     <h3>{{ producto.nombre }}</h3>
     <p>Precio: ${{ producto.precio }}</p>
-    
-      <div [class]="cantidadClase">{{ cantidad }}</div>
-<button (click)="aumentarCantidad()">+</button> -
-<button (click)="disminuirCantidad()">-</button>
-    
-   
-  </div>
-  <div></div>-
-  <div class="container">
-
-    <button (click)="agregarAlCarrito(producto, cantidad)">Añadir al Carrito</button>
-  </div>
-  
-  
-</div>
-
-<div *ngIf="!producto">
-  <p>Producto no encontrado o cargando...</p>
+    <p>Descripcion: {{ producto.descripcion }}</p>
+    <div [class]="cantidadClase">{{ cantidad }}</div>
+    <button (click)="aumentarCantidad()">+</button> -
+    <button (click)="disminuirCantidad()">-</button>
+    <div>
+      <label for="talla">Talla:</label>
+      <select [(ngModel)]="talla">
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select>
+    </div>
+    <div class="container">
+      <button (click)="agregarAlCarrito(producto, cantidad, talla)">Añadir al Carrito</button>
+    </div>
 </div>
