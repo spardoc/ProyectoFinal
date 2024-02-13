@@ -491,16 +491,13 @@ button:active {
   transform: translateY(1px); /* Hunde ligeramente el botón al hacer clic */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
-
 .fixed-button-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  position: relative; /* Cambiado de 'fixed' a 'relative' */
   width: 100%;
   text-align: center;
   z-index: 1000;
-  padding: 10px; /* Añade un poco de espacio alrededor del botón si lo deseas */
-  margin-top: auto;
+  padding: 20px 10px; /* Ajuste para añadir espacio arriba y abajo */
+  /* 'margin-top: auto;' se elimina porque no es necesario con el posicionamiento relativo */
 }
 
 .fixed-button-container button {
@@ -512,7 +509,6 @@ button:active {
   cursor: pointer;
   font-size: 1em;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  /* Asegúrate de que el botón no tenga ningún otro estilo que sobrescriba lo que necesitas */
 }
 
 .fixed-button-container button:hover {
