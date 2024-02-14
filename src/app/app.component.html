@@ -42,20 +42,25 @@
       <h2>Shopping Bag</h2>
       
       <div class="cart-content" *ngIf="detalles.length > 0">
-        <div class="cart-item" *ngFor="let detalle of detalles">
+        <div class="cart-item" *ngFor="let detalle of detalles; let i = index">
           <img [src]="detalle?.producto?.imagen" alt="Imagen del Producto" class="cart-item-image">
           <div class="cart-item-details">
             <h3>{{ detalle?.producto?.nombre }}</h3>
             <p>Cantidad: {{ detalle?.cantidad }}</p>
             <p>Precio: ${{ detalle?.producto?.precio }}</p>
             <p>Talla: {{ detalle?.talla }}</p>
+            <p>Codigo: {{ detalle?.codigo }}</p>
+            <!-- Botón para eliminar el detalle del carrito -->
+            <button (click)="eliminarDetalle(detalle?.codigo!)">Eliminar</button>
           </div>
         </div>
+      </div>
+      
+      <div *ngIf="detalles.length === 0">
+        <p>Tu carrito está vacío.</p>
+      </div>
     </div>
     
-    <div *ngIf="(detalles ?? []).length === 0">
-        <p>Tu carrito está vacío.</p>
-    </div>
     
     
     
@@ -70,9 +75,6 @@
       <div class="fixed-button-container">
         <button (click)="redirectToCheckout()">Ir a la página de pago</button>
       </div>
-    
-     
-    </div>
    
   </nav>
   <app-cart-sidebar></app-cart-sidebar>

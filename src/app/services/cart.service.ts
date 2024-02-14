@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Producto } from '../domain/producto';
@@ -37,25 +37,28 @@ export class CartService {
   }
 
   public agregarAlCarrito(producto: Producto, cantidad: number, talla: string) {
-    // Comprueba si el usuario está autenticado y si hay un código de carrito disponible.
     if (!this.authService.getAuthStatus() || !this.carritoCodigo) {
-      console.error('Usuario no autenticado o código de carrito no disponible.');
-      return;
+        console.error('Usuario no autenticado o código de carrito no disponible.');
+        return;
     }
 
-    // Agrega la talla al detalle.
-    this.agregarProductoAlCarritoBackend(producto, cantidad, talla, this.carritoCodigo).subscribe(response => {
-      if (response.mensaje === 'Producto agregado al carrito') {
-        this.carrito.agregarProducto(producto, cantidad, talla); // Incluye la talla aquí.
-        this.detalles = [...this.carrito.detalles];
-        this.carritoActualizadoSource.next(this.carrito);
-      } else {
-        console.error('Error en la respuesta del servidor', response);
-      }
+    this.agregarProductoAlCarritoBackend(producto, cantidad, talla, this.carritoCodigo).subscribe(codigoDetalle => {
+        if (codigoDetalle) {
+            // Aquí puedes manejar el código del detalle como sea necesario.
+            // Por ejemplo, agregar el producto al carrito con el código del detalle.
+            const nuevoDetalle = new DetalleCarrito(producto, cantidad, talla);
+            nuevoDetalle.codigo = codigoDetalle; // Asigna el código del detalle recibido
+            this.carrito.agregarProductoConDetalle(nuevoDetalle); // Asume que tienes un método para agregar un detalle completo
+            this.detalles = [...this.carrito.detalles];
+            this.carritoActualizadoSource.next(this.carrito);
+        } else {
+            console.error('Error en la respuesta del servidor', codigoDetalle);
+        }
     }, error => {
-      console.error('Error al agregar al carrito', error);
+        console.error('Error al agregar al carrito', error);
     });
-  }
+}
+
   
 
 
@@ -69,11 +72,24 @@ export class CartService {
   
 
   private agregarProductoAlCarritoBackend(producto: Producto, cantidad: number, talla: string, carritoCodigo: number): Observable<any> {
-    // Incluye la talla en el objeto detalle.
     const detalle = { producto: { codigo: producto.codigo }, cantidad: cantidad, talla: talla };
     const url = `${environment.WS_PATH}/carritos/${carritoCodigo}/productos`;
-    return this.http.post(url, detalle);
-  }
+
+    return this.http.post<any>(url, detalle).pipe(
+        map(response => {
+            // Asume que la respuesta incluye un campo "codigoDetalle"
+            console.log("Codigo Detalle: ",response.codigoDetalle);
+            return response.codigoDetalle; // Extrae y devuelve el código del detalle
+            
+        }),
+        catchError(error => {
+            console.error('Error al agregar producto al carrito:', error);
+            return throwError(() => new Error('Error al agregar producto al carrito.'));
+        })
+    );
+}
+
+
   
 
   obtenerCarritoCliente(codigoCliente: number): Observable<Carrito> {
@@ -89,30 +105,22 @@ export class CartService {
   }
 
   public actualizarCarrito(carritoRecuperado: Carrito) {
-    console.log('Llamando a actualizar carrito')
-    if (carritoRecuperado) {
-        // Reinicializar el carrito con los detalles recuperados
-        this.carrito = new Carrito();
-        carritoRecuperado.detalles
-            .filter(detalle => detalle.producto) // Filtrar los detalles que tienen un producto definido
-            .forEach(detalle => {
-                if (detalle.producto && detalle.cantidad) {
-                    this.carrito.agregarProducto(detalle.producto, detalle.cantidad, detalle.talla);
-                }
-            });
+    console.log('Actualizando carrito con la información más reciente del backend');
+    this.carrito = new Carrito(); // Reinicia el carrito para asegurar un estado limpio
+    
+    carritoRecuperado.detalles.forEach(detalle => {
+      // Asume que `detalle` ya incluye todos los atributos necesarios, incluyendo un código válido
+      const nuevoDetalle = new DetalleCarrito(detalle.producto, detalle.cantidad, detalle.talla);
+      nuevoDetalle.codigo = detalle.codigo; // Importante: asegura que el código del detalle se mantiene actualizado
+      this.carrito.detalles.push(nuevoDetalle);
+    });
+  
+    // Asegura que el resto del estado del carrito se actualiza adecuadamente
+    this.carrito.clienteCodigo = carritoRecuperado.clienteCodigo;
+    this.detalles = [...this.carrito.detalles];
+    this.carritoActualizadoSource.next(this.carrito); // Notifica a los suscriptores del cambio
+  }
 
-        // Actualizar el código del cliente
-        this.carrito.clienteCodigo = carritoRecuperado.clienteCodigo;
-
-        // Actualizar la lista de detalles en base al carrito actualizado
-        this.detalles = [...this.carrito.detalles];
-
-        // Notificar a los suscriptores
-        this.carritoActualizadoSource.next(this.carrito);
-    } else {
-        console.log('ERROR AL RECUPERAR CARRITO');
-    }
-  } 
 
   setCarritoCodigo(codigo: number) {
     this.carritoCodigo = codigo;
@@ -130,5 +138,19 @@ export class CartService {
     console.log('Carrito vaciado en CartService');
   }
   
+  public eliminarDetalleCarrito(codigoDetalleCarrito: number): void {
+    const url = `${environment.WS_PATH}/carritos/borrar/${codigoDetalleCarrito}`;
+
+    this.http.delete<any>(url).subscribe({
+      next: () => {
+        // Elimina el detalle del carrito localmente
+        this.carrito.detalles = this.carrito.detalles.filter(detalle => detalle.codigo !== codigoDetalleCarrito);
+        this.carritoActualizadoSource.next(this.carrito);
+      },
+      error: error => {
+        console.error('Error al eliminar el detalle del carrito', error);
+      }
+    });
+  }
   
 }

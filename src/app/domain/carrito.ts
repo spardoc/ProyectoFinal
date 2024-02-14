@@ -5,20 +5,21 @@ export class Carrito {
     detalles: DetalleCarrito[] = [];
     clienteCodigo?: number;
 
-    agregarProducto(producto: Producto, cantidad: number, talla: string) {
-        if (!producto) return;
+    agregarProductoConDetalle(detalle: DetalleCarrito) {
+        // Asume que el detalle ya incluye el código y la talla
+        const indiceExistente = this.detalles.findIndex(d => d.producto.codigo === detalle.producto.codigo && d.talla === detalle.talla);
 
-        // Busca un detalle existente que coincida tanto en código de producto como en talla
-        const detalleExistente = this.detalles.find(detalle => detalle.producto.codigo === producto.codigo && detalle.talla === talla);
-        
-        if (detalleExistente) {
-            detalleExistente.cantidad += cantidad;
+        if (indiceExistente !== -1) {
+            // Si el detalle ya existe, solo actualiza la cantidad
+            this.detalles[indiceExistente].cantidad += detalle.cantidad;
         } else {
-            this.detalles.push(new DetalleCarrito(producto, cantidad, talla));
+            // Si es un nuevo detalle, lo agrega al array de detalles
+            this.detalles.push(detalle);
         }
     }
 
-    removerProducto(codigoProducto: number) {
-        this.detalles = this.detalles.filter(detalle => detalle.producto.codigo !== codigoProducto);
+    removerProducto(codigoDetalle: number) {
+        // Ajusta este método para que use el código del detalle para eliminar
+        this.detalles = this.detalles.filter(detalle => detalle.codigo !== codigoDetalle);
     }
 }

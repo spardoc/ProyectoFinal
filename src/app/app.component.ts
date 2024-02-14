@@ -15,31 +15,40 @@ export class AppComponent implements OnInit {
   isCartOpen = false;
 
   pages = [
-    {titulo: 'Inicio', path: 'pages/inicio', icon: 'fas fa-home'},
-    {titulo: 'Carrito', icon: 'fas fa-shopping-cart'},
-    {titulo: 'Login', path: 'pages/login', icon: 'fas fa-user'}
-  ]
+    { titulo: 'Inicio', path: 'pages/inicio', icon: 'fas fa-home' },
+    { titulo: 'Carrito', icon: 'fas fa-shopping-cart' },
+    { titulo: 'Login', path: 'pages/login', icon: 'fas fa-user' }
+  ];
   
-  constructor(public cartService: CartService, private authService: AuthService,private router: Router) { 
-    this.cartService = cartService;
-  }
+  constructor(
+    public cartService: CartService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
+    this.subscribeToCartUpdates();
+    this.navigateToHomeIfLoggedIn();
+  }
+
+  subscribeToCartUpdates() {
     this.cartService.carritoActualizado$.subscribe(carrito => {
       if (carrito) {
-        this.detalles = carrito.detalles || []; // Actualiza los items del carrito
+        this.detalles = carrito.detalles || [];
       }
     });
+  }
+
+  navigateToHomeIfLoggedIn() {
     if (this.authService.getAuthStatus()) {
-      const codigoCliente = this.authService.getCodigoCliente(); // Asegúrate de tener este método en AuthService
+      const codigoCliente = this.authService.getCodigoCliente();
       if (codigoCliente) {
         this.cartService.obtenerCarritoCliente(codigoCliente).subscribe(carrito => {
-          // Aquí asumes que tienes un método para actualizar el estado del carrito en CartService
           this.cartService.actualizarCarrito(carrito);
         }, error => {
           console.error('Error al recuperar el carrito: ', error);
         });
       }
-      
     }
     this.router.navigate(['pages/inicio']);
   }
@@ -49,9 +58,12 @@ export class AppComponent implements OnInit {
     this.isCartOpen = !this.isCartOpen;
   }
 
-  redirectToCheckout(): void {
-    
-    this.router.navigate(['pages/carrito2']); // Asegúrate de que '/checkout' sea la ruta correcta
-    this.isCartOpen = !this.isCartOpen;
+  redirectToCheckout() {
+    this.router.navigate(['pages/carrito2']);
+    this.isCartOpen = false;
+  }
+
+  eliminarDetalle(codigoDetalleCarrito: number) {
+    this.cartService.eliminarDetalleCarrito(codigoDetalleCarrito);
   }
 }
