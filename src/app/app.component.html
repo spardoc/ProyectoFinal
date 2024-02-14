@@ -23,6 +23,7 @@
           <i class="{{ link.icon }}"></i>
           {{ link.titulo }}
         </a>
+        
         <div class="sidebar">
           <a *ngIf="!link.path" (click)="link.titulo === 'Carrito' && toggleCart()">
             <i class="{{ link.icon }}"></i>
@@ -32,7 +33,7 @@
       </li>   
       
     </ul>
-
+    
     <a href="https://wa.link/hs4li1" target="_blank" class="whatsapp-float" title="Habla con nosotros por WhatsApp">
       <i class="fab fa-whatsapp"></i>
     </a>
@@ -64,6 +65,8 @@
     
     
     
+    
+
       <ng-template #emptyCart>
         
         <div class="contenedor">

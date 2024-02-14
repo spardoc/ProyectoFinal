@@ -1,5 +1,11 @@
+<!-- Campo de búsqueda -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="filtroNombre" placeholder="Buscar producto por nombre..." (input)="filtrarProductos()" />
+</div>
+
+<!-- Lista de productos filtrados -->
 <div class="productos-container">
-  <div class="producto" *ngFor="let producto of productos">
+  <div class="producto" *ngFor="let producto of productosFiltrados">
     <button [routerLink]="['/pages/inicio', producto.codigo]">
       <img [src]="producto.imagen" alt="Imagen del Producto">
       <div class="info">
@@ -9,4 +15,3 @@
     </button>
   </div>
 </div>
-   

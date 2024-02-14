@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   title = 'ProyectoFinal';
   detalles: DetalleCarrito[] = [];
   isCartOpen = false;
+  filtroNombre: string = '';
+  detallesFiltrados: DetalleCarrito[] = [];
 
   pages = [
     { titulo: 'Inicio', path: 'pages/inicio', icon: 'fas fa-home' },
@@ -29,6 +31,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.subscribeToCartUpdates();
     this.navigateToHomeIfLoggedIn();
+    this.filtrarDetalles();
   }
 
   subscribeToCartUpdates() {
@@ -65,5 +68,15 @@ export class AppComponent implements OnInit {
 
   eliminarDetalle(codigoDetalleCarrito: number) {
     this.cartService.eliminarDetalleCarrito(codigoDetalleCarrito);
+  }
+
+  filtrarDetalles() {
+    if (!this.filtroNombre) {
+      this.detallesFiltrados = this.detalles; // Si no hay filtro, muestra todos los detalles.
+    } else {
+      this.detallesFiltrados = this.detalles.filter(detalle =>
+        detalle.producto.nombre!.toLowerCase().includes(this.filtroNombre.toLowerCase())
+      );
+    }
   }
 }

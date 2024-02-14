@@ -31,12 +31,10 @@ export class AuthService {
         tap((response: any) => {
           if (response.codigoCarrito) {
             this.setCarritoCodigo(response.codigoCarrito);
-            console.log('CODIGO CARRITO EN AUTH SERVICE> ',response.codigoCarrito)
           }
           // Asegúrate de manejar también el código del cliente
           if (response.codigoCliente) {
             this.setCodigoCliente(response.codigoCliente);
-            console.log('CODIGO CLIENTE EN AUTH SERVICE> ',response.codigoCliente)
           }
         })
       );

@@ -10,12 +10,25 @@ import { ProductosService } from 'src/app/services/productos.service';
 })
 export class InicioComponent implements OnInit {
   productos: Producto[] = [];
+  productosFiltrados: Producto[] = [];
+  filtroNombre: string = '';
 
   constructor(private productoService: ProductosService, private router: Router) { }
 
   ngOnInit(): void {
     this.productoService.getProductos().subscribe(data => {
       this.productos = data;
+      this.productosFiltrados = data; // Inicialmente, todos los productos están en la lista filtrada.
     });
+  }
+
+  filtrarProductos(): void {
+    if (!this.filtroNombre) {
+      this.productosFiltrados = this.productos;
+    } else {
+      this.productosFiltrados = this.productos.filter(producto =>
+        producto.nombre!.toLowerCase().includes(this.filtroNombre.toLowerCase())
+      );
+    }
   }
 }

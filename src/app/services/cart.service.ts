@@ -105,7 +105,6 @@ export class CartService {
   }
 
   public actualizarCarrito(carritoRecuperado: Carrito) {
-    console.log('Actualizando carrito con la información más reciente del backend');
     this.carrito = new Carrito(); // Reinicia el carrito para asegurar un estado limpio
     
     carritoRecuperado.detalles.forEach(detalle => {
