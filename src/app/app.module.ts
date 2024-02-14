@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +14,10 @@ import { CartSidebarComponent } from './pages/cart-sidebar/cart-sidebar.componen
 import { CrearuserComponent } from './pages/crearuser/crearuser.component';
 import { ViewProductoComponent } from './pages/view-producto/view-producto.component';
 
-import {HttpClientModule} from '@angular/common/http'; // CONSULTAS SQL
+import {HttpClientModule} from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker'; // CONSULTAS SQL
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,15 @@ import {HttpClientModule} from '@angular/common/http'; // CONSULTAS SQL
     AppRoutingModule,
     FormsModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, // agregar esto
+    ToastrModule.forRoot(), // ToastrModule añadido
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

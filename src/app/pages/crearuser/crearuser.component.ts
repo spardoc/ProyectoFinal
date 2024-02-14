@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/domain/cliente';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-crearuser',
@@ -12,7 +14,7 @@ export class CrearuserComponent {
 
   cliente: Cliente = new Cliente();
 
-  constructor(private clienteService: ClientesService, private router: Router) {}
+  constructor(private toastr: ToastrService,private clienteService: ClientesService, private router: Router) {}
 
   crear(): void {
     this.clienteService.saveCliente(this.cliente).subscribe(
