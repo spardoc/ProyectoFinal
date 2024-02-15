@@ -85,8 +85,4 @@ export class Carrito2Component implements OnInit {
       return total + totalConIVA;
     }, 0);
   }
-
- 
-  
-  
 }

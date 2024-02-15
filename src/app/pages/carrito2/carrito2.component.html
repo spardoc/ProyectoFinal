@@ -41,12 +41,9 @@
       <input id="nombreTarjeta" type="text" formControlName="nombreTarjeta">
     </div>
   
-    <div formGroupName="fechaVencimiento">
+    <div>
       <label for="fechaVencimiento">Fecha de Vencimiento</label>
       <input id="fechaVencimiento"  type="text" formControlName="fechaVencimiento">
-        
-      
-      
     </div>
   
     <div>
@@ -65,10 +62,7 @@
     </div>
   </form>
   
-
-
   <div *ngIf="detalles.length === 0">
     <p>Tu carrito está vacío.</p>
   </div>
 </div>
-
