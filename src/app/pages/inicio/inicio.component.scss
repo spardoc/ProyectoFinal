@@ -67,3 +67,31 @@ img {
   border-top-right-radius: 10px;
   margin-bottom: 54px; /* Aumenta el espacio debajo de la imagen */
 }
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  input[type="text"] {
+    width: 100%;
+    max-width: 500px; // Limita el ancho máximo para no ocupar toda la pantalla en dispositivos grandes
+    padding: 10px 20px;
+    border: 2px solid #ccc; // Color del borde
+    border-radius: 25px; // Bordes redondeados
+    font-size: 16px; // Tamaño del texto
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra suave para dar profundidad
+    transition: border-color 0.3s, box-shadow 0.3s; // Transiciones suaves para interacciones
+
+    &:focus {
+      border-color: #007bff; // Cambia el color del borde al enfocarse
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); // Sombra más pronunciada al enfocar
+      outline: none; // Elimina el contorno predeterminado para no interferir con los estilos personalizados
+    }
+
+    &::placeholder {
+      color: #aaa; // Color del texto del placeholder
+      font-style: italic; // Estilo del texto del placeholder
+    }
+  }
+}

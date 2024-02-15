@@ -15,7 +15,7 @@ export class ViewProductoComponent implements OnInit {
   cantidadClase = 'cantidad';
   codigoProducto: number = 0; // Inicializar con un valor por defecto
   producto: any;
-  talla: string = '';
+  talla: string = 'M';
 
   constructor(
     private route: ActivatedRoute,

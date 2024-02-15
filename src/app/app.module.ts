@@ -18,6 +18,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker'; // CONSULTAS SQL
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ToastrModule } from 'ngx-toastr';
     ViewProductoComponent
   ],
   imports: [
+    AngularFirestoreModule.enablePersistence(),
     BrowserModule,
     AppRoutingModule,
     FormsModule, 

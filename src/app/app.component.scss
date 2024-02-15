@@ -377,7 +377,7 @@ img {
 
 /* Efecto al pasar el ratón por encima */
 .cart-sidebar .cart-content button:hover {
-  background-color: #3949ab; /* Color de fondo un poco más oscuro */
+  background-color: rgb(239, 11, 49); /* Color de fondo un poco más oscuro */
   transform: scale(1.05); /* Escala ligeramente más grande para efecto de resalte */
 }
 
@@ -434,7 +434,7 @@ footer {
 /****************************************
 /* Botón del carrito con efecto de pulsación */
 .cart-sidebar .cart-content button {
-  background-color: var(--secondary-color);
+  background-color: rgb(239, 11, 49);
   /* ... otros estilos ... */
 }
 /****************************************
@@ -563,5 +563,6 @@ button:active {
 .whatsapp-float:hover {
   background-color: #128c7e;
 }
+
 
 
