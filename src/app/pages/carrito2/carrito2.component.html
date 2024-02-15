@@ -27,7 +27,46 @@
   <div *ngIf="detalles.length > 0" class="total-carrito-container">
     <h3>Total del Carrito (con IVA): ${{ getTotalConIVA() | number:'1.2-2' }}</h3>
   </div>
-  <button (click)="generarFactura()" *ngIf="detalles.length > 0">Generar Factura</button>
+  
+  <form [formGroup]="pagoForm" >
+    
+  
+    <div>
+      <label for="numeroTarjeta">Número</label>
+      <input id="numeroTarjeta" type="text" formControlName="numeroTarjeta">
+    </div>
+  
+    <div>
+      <label for="nombreTarjeta">Nombre y Apellido como figura en la tarjeta</label>
+      <input id="nombreTarjeta" type="text" formControlName="nombreTarjeta">
+    </div>
+  
+    <div formGroupName="fechaVencimiento">
+      <label for="fechaVencimiento">Fecha de Vencimiento</label>
+      <input id="fechaVencimiento"  type="text" formControlName="fechaVencimiento">
+        
+      
+      
+    </div>
+  
+    <div>
+      <label for="codigoSeguridad">Código de Seguridad</label>
+      <input id="codigoSeguridad" type="text" formControlName="codigoSeguridad">
+    </div>
+  
+    <div>
+      <label for="cedulaPagador">Cédula del pagador</label>
+      <input id="cedulaPagador" type="text" formControlName="cedulaPagador">
+    </div>
+  
+    
+    <div class="boton-centrado">
+      <button (click)="generarFactura()" *ngIf="detalles.length > 0" [disabled]="pagoForm.valid">Generar Factura</button>
+    </div>
+  </form>
+  
+
+
   <div *ngIf="detalles.length === 0">
     <p>Tu carrito está vacío.</p>
   </div>

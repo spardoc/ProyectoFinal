@@ -7,7 +7,11 @@
   </head>
   
   <header class="app-header">
+    <img src="assets\rg-removebg-preview.png" alt="Logo Tienda de Ropa Gallito" class="logo">
+
+    
     <div class="header-content">
+      
       <h1>
         <span>T</span><span>i</span><span>e</span><span>n</span><span>d</span><span>a</span>&nbsp;
         <span>d</span><span>e</span>&nbsp;
@@ -58,7 +62,9 @@
       </div>
       
       <div *ngIf="detalles.length === 0">
-        <p>Tu carrito está vacío.</p>
+        <div class="contenedor-centrado">
+          <p>Tu carrito está vacío.</p>
+        </div>
       </div>
     
     

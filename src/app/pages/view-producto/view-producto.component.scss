@@ -77,10 +77,22 @@ button:hover {
   align-items: center;
 }
 .cantidad {
-  font-size: 20px;
+  display: inline-flex; /* Usa inline-flex para facilitar la alineación del contenido interno */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  font-size: 16px; /* Tamaño de fuente más pequeño */
   color: #ffffff;
-  /* otros estilos */
+  background-color: #007bff; /* Ajusta el color de fondo según necesites */
+  padding: 3px 8px; /* Reducción del espaciado interno para hacer el distintivo más pequeño */
+  border-radius: 12px; /* Bordes redondeados, ajusta según la estética deseada */
+  margin: 5px 0; /* Ajusta el margen para asegurar el centrado y la separación adecuada */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Sombra más sutil */
+  font-weight: bold;
+  transition: transform 0.2s ease; /* Animación más rápida para interacción */
 }
+
+/* Ajusta el contenedor de la cantidad para asegurar su centrado */
+
 
 
 h2 {

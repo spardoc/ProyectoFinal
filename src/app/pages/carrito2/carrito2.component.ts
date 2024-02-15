@@ -6,6 +6,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { FacturasService } from 'src/app/services/facturas.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-carrito2',
@@ -13,6 +14,15 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./carrito2.component.scss']
 })
 export class Carrito2Component implements OnInit {
+  pagoForm = new FormGroup({
+    
+    numeroTarjeta: new FormControl('', [Validators.required,]),
+    nombreTarjeta: new FormControl('', Validators.required),
+    fechaVencimiento: new FormControl('', Validators.required),
+    codigoSeguridad: new FormControl('', [Validators.required, ]),
+    cedulaPagador: new FormControl('', [Validators.required, ]),
+    
+  });
 
   detalles: DetalleCarrito[] = [];
 
@@ -76,7 +86,7 @@ export class Carrito2Component implements OnInit {
     }, 0);
   }
 
-  
+ 
   
   
 }

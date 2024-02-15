@@ -14,6 +14,8 @@
 }
 
 
+
+
 .fadeIn {
   animation: fade-in 0.5s ease-in-out;
 }
@@ -66,6 +68,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 h1 span {
@@ -564,5 +567,59 @@ button:active {
   background-color: #128c7e;
 }
 
+
+.logo {
+  margin-right: 0px; /* Añade un margen a la derecha del logo para separarlo del texto */
+  height: auto; /* Mantiene la proporción original de la imagen */
+  width: 120px; /* Ajusta este valor basado en el tamaño deseado para tu logo */
+  border: none; /* Asegura que no haya bordes */
+  object-fit: contain; /* Asegura que el logo se ajuste sin distorsionarse */
+}
+
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulseBackground {
+  0% {
+    background-color: #ff8a00;
+    background-size: 100% 100%;
+  }
+  50% {
+    background-color: #ffa931;
+    background-size: 110% 110%;
+  }
+  100% {
+    background-color: #ff8a00;
+    background-size: 100% 100%;
+  }
+}
+
+.app-header {
+  background-image: radial-gradient(circle, #ff0000, #dc8d32, #ffa931);
+  animation: pulseBackground 10s ease-in-out infinite;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+}
+.contenedor-centrado {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente si el contenedor tiene altura específica */
+  height: 100vh; /* Altura de viewport para centrado vertical completo, ajustable según necesites */
+}
+
+.contenedor-centrado p {
+  text-align: center; /* Asegura que el texto dentro del <p> también esté centrado */
+}
 
 
