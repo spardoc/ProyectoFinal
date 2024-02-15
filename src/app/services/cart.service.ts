@@ -59,9 +59,6 @@ export class CartService {
     });
 }
 
-  
-
-
   toggleCart() {
     this.cartVisibleSource.next(!this.cartVisibleSource.getValue());
   }
@@ -70,7 +67,6 @@ export class CartService {
     return this.detalles;
   }
   
-
   private agregarProductoAlCarritoBackend(producto: Producto, cantidad: number, talla: string, carritoCodigo: number): Observable<any> {
     const detalle = { producto: { codigo: producto.codigo }, cantidad: cantidad, talla: talla };
     const url = `${environment.WS_PATH}/carritos/${carritoCodigo}/productos`;
@@ -88,10 +84,6 @@ export class CartService {
         })
     );
 }
-
-
-  
-
   obtenerCarritoCliente(codigoCliente: number): Observable<Carrito> {
     return this.http.get<Carrito>(`${environment.WS_PATH}/carritos/${codigoCliente}/carrito`).pipe(
       tap(carrito => {
@@ -119,7 +111,6 @@ export class CartService {
     this.detalles = [...this.carrito.detalles];
     this.carritoActualizadoSource.next(this.carrito); // Notifica a los suscriptores del cambio
   }
-
 
   setCarritoCodigo(codigo: number) {
     this.carritoCodigo = codigo;

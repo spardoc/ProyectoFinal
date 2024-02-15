@@ -84,6 +84,4 @@ export class AuthService {
   getCarritoCodigoSincrono(): number | null {
     return this.carritoCodigo;
   }
-
-
 }

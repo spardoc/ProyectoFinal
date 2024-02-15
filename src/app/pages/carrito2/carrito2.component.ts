@@ -24,8 +24,25 @@ export class Carrito2Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Aquí asumimos que tienes un método en CartService que devuelve los detalles actuales del carrito.
-    this.detalles = this.carritoService.getCartItems();
+    this.carritoService.carritoActualizado$.subscribe(carritoActualizado => {
+      if (carritoActualizado) {
+        this.detalles = carritoActualizado.detalles;
+      }
+    });
+    
+    // Carga inicial de los detalles del carrito
+    this.cargarDetallesDelCarrito();
+  }
+
+  cargarDetallesDelCarrito(): void {
+    // Este método asume que tienes un método para obtener el ID del carrito actual.
+    // Si no es así, necesitarás ajustar esta lógica para obtener los detalles del carrito de otra manera.
+    const codigoCarrito = this.authService.getCarritoCodigoSincrono();
+    if (codigoCarrito) {
+      this.carritoService.obtenerCarritoCliente(codigoCarrito).subscribe(carrito => {
+        this.detalles = carrito.detalles;
+      });
+    }
   }
 
   generarFactura() {
