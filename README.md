@@ -30,21 +30,20 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Proyecto Final web de compras
 
 ## Descripción
-una web de sompras implementando angular como fronted y de backend uso de eclipse asi como
-de base de datos mysql
+Una web de compras implementando Angular como fronted y de backend uso del servidor WildFly asi como de base de datos mysql
 
 ## Características
--registro y auntentificacion de usuarios
--busquedas de productos
+-Registro y auntentificacion de usuarios
+-Busquedas de productos
 -Carrito de compras
--detalles de factura
--facturas
--chat de whatsapp
--adicion y eliminacion de productos
+-Detalles de factura
+-Facturas
+-Chat de whatsapp
+-Adicion y eliminacion de productos
 ## Tecnologías Utilizadas
 -Fronted angular 
--Backend uso de Eclipse Java Development Tools (JDT)
--Base de datos mysql
+-Backend uso de Eclipse Java Development Tools (JDT), Wildfly Server
+-Base de datos MySql
 
 ## Requisitos Previos
 instalar las librerias necesarias de angular
